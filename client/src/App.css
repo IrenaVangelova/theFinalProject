@@ -1,0 +1,13 @@
+.App {
+  margin: 0px;
+  top: 0px;
+  left: 0px;
+  width: 1920px;
+  height: 2065px;
+  /* UI Properties */
+  background: var(--softwhite) 0% 0% no-repeat padding-box;
+  background: #F8F7F2 0% 0% no-repeat padding-box;
+  opacity: 1;
+}
+
+

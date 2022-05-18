@@ -1,0 +1,17 @@
+.dot {
+    display: block;
+    border-radius: 50%;
+    top: 75px;
+    left: 775px;
+    width: 9px;
+    height: 9px;
+    /* UI Properties */
+    background: var(--orange) 0% 0% no-repeat padding-box;
+    background: #F0972A 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+
+ul {
+    list-style-type: none;
+}
+
