@@ -1,9 +1,35 @@
 var express = require('express');
 var router = express.Router();
+const controller = require('../controllers/users');
+const { expressjwt: jwt } = require('express-jwt');
+const response = require('../lib/response_handler');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+require('dotenv').config();
+
+router.use(jwt({
+  secret: process.env.JWT_SECRET_KEY,
+  algorithms: ['HS256'] 
+}).unless({
+  path: [
+        {
+              url: '/users/register', methods: ['POST']
+        },
+        {
+              url: '/users/login', methods: ['POST']
+        }
+  ]
+}));
+
+router.use((err, req, res, next) => {
+      console.log(err.name);
+      if (err.name === 'UnauthorizedError') {
+            response(res, 401, 'Unauthorized access');
+      }
+})
+
+router.post('/register', controller.register)
+router.post('/login', controller.login)
+router.get('/:id', controller.byId)
+router.post('/:id/update', controller.update)
 
 module.exports = router;
