@@ -1,10 +1,9 @@
-import Navbar from "../../components/Navbar/Navbar";
+import SectionTitle from '../../components/sectionTitle';
 
 const Breakfast = () => {
     return (
         <div>
-            <Navbar />
-            <p>brbrbr</p>
+            <SectionTitle title={'Breakfast'} />
         </div>
     )
 }

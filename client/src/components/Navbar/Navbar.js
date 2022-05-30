@@ -1,37 +1,30 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import "./Navbar.css";
+import './Navbar.css';
+import { iconStyle } from './NavigationStyles';
 
-const Navbar = () => {
-    return ( 
-        <div>
-            <div>
-                <p>Baby's</p>
-            </div>
-            <nav>
-                <ul>
-                    <li>
-                        {/* <Link to=''>Breakfast</Link> */}
-                        a
-                    </li>
-                    <span className="dot"></span>
-                    <li>
-                        {/* <Link to=''>Brunch</Link> */}
-                        b
-                    </li>
-                    <span className="dot"></span>
-                    <li>
-                        {/* <Link to=''>Lunch</Link> */}
-                        c
-                    </li>
-                    <span className="dot"></span>
-                    <li>
-                        {/* <Link to=''>Dinner</Link> */}
-                        d
-                    </li>
-                </ul>
-            </nav>
+
+function Navbar() {
+  return (
+    <div className='nav-bar'>
+      <Link to='/' style={{ textDecoration: 'none' }}>
+        <div className='nav-logo'>
+          <div className='nav-logo-baby'>Baby's</div>
+          <div className='nav-logo-food'>food place</div>
         </div>
-    )
+      </Link>
+      <div className='nav-links'>
+        <Link to='/breakfast'>Breakfast</Link>
+        <FontAwesomeIcon icon={faCircle} color='#F0972A' style={iconStyle} />
+        <Link to='/brunch'>Brunch</Link>
+        <FontAwesomeIcon icon={faCircle} color='#F0972A' style={iconStyle} />
+        <Link to='/lunch'>Lunch</Link>
+        <FontAwesomeIcon icon={faCircle} color='#F0972A' style={iconStyle} />
+        <Link to='/dinner'>Dinner</Link>
+      </div>
+    </div>
+  );
 }
 
 export default Navbar;
