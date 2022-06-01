@@ -11,7 +11,7 @@ function Navbar() {
       <Link to='/' style={{ textDecoration: 'none' }}>
         <div className='nav-logo'>
           <div className='nav-logo-baby'>Baby's</div>
-          <div className='nav-logo-food'>food place</div>
+          <div className='nav-logo-food'>food&nbsp;place</div>
         </div>
       </Link>
       <div className='nav-links'>
@@ -23,6 +23,25 @@ function Navbar() {
         <FontAwesomeIcon icon={faCircle} color='#F0972A' style={iconStyle} />
         <Link to='/dinner'>Dinner</Link>
       </div>
+      <div className='nav-login-buttons'>
+          <Link to='/login'>
+            <button className='login-button'>LOG IN</button>
+          </Link>
+          <div
+            style={{
+              marginLeft: '1rem',
+              marginRight: '1rem',
+              fontSize: '1.05rem',
+              font: 'normal normal 900 16px/21px Roboto',
+              color: '#f0972a',
+            }}
+          >
+            or
+          </div>
+          <Link to='/register'>
+            <button className='register-button'>CREATE ACCOUNT</button>
+          </Link>
+        </div>
     </div>
   );
 }

@@ -85,25 +85,34 @@
 .nav-links {
   display: flex;
   align-items: center;
+  margin-top: 80px;
 }
 
 .nav-logo-baby {
   position: relative;
+  top: 52px;
+  width: 177px;
+  height: 58px;
   font-size: 3.7rem;
   font-family: 'Roboto Slab';
-  color: var(--darkgrey);
+  color: #626262;
   font-weight: 700;
   margin-bottom: 1rem;
+  
 }
 
 .nav-logo-food {
   position: absolute;
+  top: 100px;
+  left: 375px;
+  width: 67px;
+  height: 14px;
   color: var(--orange);
   font-size: 0.9rem;
   font-family: 'Roboto Slab';
   font-weight: 600;
-  top: 5.8rem;
-  left: 20.5rem;
+  display:inline-block;
+  margin-top: 12px;
 }
 
 .nav-links a {
@@ -125,6 +134,48 @@
 }
 
 .section-title.unnamed-character-style-5 {
-  line-height: 50px;
+  line-height: 40px;
+}
+
+.nav-login-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 70px;
+}
+
+.login-button {
+  font: var(--unnamed-font-style-normal) normal 900 16px/19px
+    var(--unnamed-font-family-roboto);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  border-radius: 5px;
+  color: #a5a5a5;
+  font-size: 15px;
+  background: var(--softwhite);
+  padding: 10px 20px 10px 20px;
+  border: solid var(--midgrey) 1px;
+  text-decoration: none;
+}
+
+.login-button:hover {
+  cursor: pointer;
+}
+
+.register-button {
+  letter-spacing: var(--unnamed-character-spacing-0);
+  border-radius: 5px;
+  border: 0;
+  font: normal normal 900 16px/21px Roboto;
+  color: var(--white);
+  font-size: 15px;
+  background: var(--green) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.register-button:hover {
+  cursor: pointer;
 }
 
