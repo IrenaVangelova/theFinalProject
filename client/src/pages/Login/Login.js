@@ -1,9 +1,5 @@
-import { useState } from 'react';
-
-
-
 import SectionTitle from '../../components/sectionTitle';
-
+import './Login.css'
 
 const Login = () => {
 //     const [userLogin, setUserLogina] = useState({
@@ -25,30 +21,12 @@ const Login = () => {
   return (
     <>
       <SectionTitle title={'Log In'} />
-      <div
-        className='login-container'
-        style={{ display: 'flex', marginTop: '2rem' , textAlign: 'left' }}
-      >
-        <div
-          className='login-text-box'
-          style={{ width: '60%', paddingRight: '4rem' }}
-        >
-          <h1
-            style={{
-              fontSize: '46px',
-              color: '#F0972A',
-              fontFamily: 'Roboto Slab',
-            }}
-          >
+      <div className='login-container'>
+        <div className='login-text-box'>
+          <h1>
             Welcome to <span style={{ color: '#626262' }}>Baby's</span>
           </h1>
-          <p
-            style={{
-              fontFamily: 'Roboto Slab',
-              fontSize: '20px',
-              color: '#A5A5A5',
-            }}
-          >
+          <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestiae
             velit fugiat vero tenetur reprehenderit quibusdam consequuntur saepe
             ipsum soluta rem praesentium modi obcaecati nemo, rerum nisi impedit
@@ -58,89 +36,23 @@ const Login = () => {
             dolorem quae eos et? Corrupti, dicta impedit!
           </p>
         </div>
-        <div
-          className='login-form'
-          style={{ width: '40%', margin: '3rem 2rem' }}
-        >
-          <form
-            style={{ display: 'flex', flexDirection: 'column' }}
-          >
-            <label
-              htmlFor='email'
-              style={{
-                fontFamily: 'Roboto Slab',
-                fontWeight: 'bolder',
-                marginBottom: '0.7rem',
-                color: '#F0972A',
-              }}
-            >
-              Email
-            </label>
+        <form>
+          <div className='login-form'>
+            <label htmlFor='email'>Email</label>
             <input
               type='text'
               id='email'
               placeholder='user@domain.com'
-              style={{
-                padding: '5px',
-                height: '1.7rem',
-                borderRadius: '5px',
-                fontFamily: 'Roboto Slab',
-                fontWeight: 'bold',
-                border: '1px solid #A5A5A5',
-                background: '#F0EFEA',
-                width: '60%',
-                color: '#626262',
-              }}
             />
-
-            <label
-              htmlFor='password'
-              style={{
-                fontFamily: 'Roboto Slab',
-                fontWeight: 'bolder',
-                marginTop: '1.5rem',
-                marginBottom: '0.7rem',
-                color: '#F0972A',
-              }}
-            >
-              Password
-            </label>
+            <label htmlFor='password'>Password</label>
             <input
               type='password'
               id='password'
-              placeholder='*****'
-              style={{
-                padding: '5px',
-                height: '1.7rem',
-                borderRadius: '5px',
-                fontFamily: 'Roboto Slab',
-                fontWeight: 'bold',
-                border: '1px solid #A5A5A5',
-                background: '#F0EFEA',
-                width: '60%',
-                color: '#626262',
-              }}
+              placeholder='*******'
             />
-            <button
-              type='submit'
-              style={{
-                font: 'normal normal 700 16px/45px Roboto',
-                width: '28%',
-                height: '2.7rem',
-                marginTop: '2rem',
-                boxShadow: '0px 3px 6px #00000029',
-                border: '0',
-                textAlign: 'center',
-                borderRadius: '6px',
-                background: '#96BB36 0% 0% no-repeat padding-box',
-                fontSize: '16px',
-                color: '#FFFFFF',
-              }}
-            >
-              LOG IN
-            </button>
-          </form>
-        </div>
+            <button type='submit'>LOG IN</button>
+          </div>
+        </form>
       </div>
     </>
   );

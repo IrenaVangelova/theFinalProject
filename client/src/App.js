@@ -10,12 +10,13 @@ import Dinner from './pages/Dinner/Dinner';
 import Home from './pages/Home';
 import CreateUser from './pages/CreateUser/CreateUser';
 import Login from './pages/Login/Login';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
     <div className="App">
-      <div className="container">
-        <BrowserRouter>
+      <BrowserRouter>
+        <div className="container">
           <Navbar />
           <Routes>
           <Route path='/' element={<Home />} />
@@ -26,8 +27,9 @@ function App() {
             <Route path='/register' element={<CreateUser />} />
             <Route path='/login' element={<Login />} />
           </Routes>
-        </BrowserRouter>
-      </div>
+        </div>
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 }
