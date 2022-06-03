@@ -2,21 +2,6 @@ import SectionTitle from '../../components/sectionTitle';
 import './Login.css'
 
 const Login = () => {
-//     const [userLogin, setUserLogina] = useState({
-//         email: '',
-//         password: '',
-//       });
-    
-//       const handleInputChange = (e) => {
-//         const { name, value } = e.target;
-//         setUserLogina((prevState) => ({ ...prevState, [name]: value }));
-//       };
-
-//   const handleSubmitFormData = (data, e) => {
-//     e.preventDefault();
-//   };
-
-//   const onError = (errors, e) => console.log(errors, e);
 
   return (
     <>
