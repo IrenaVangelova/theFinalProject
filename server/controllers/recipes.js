@@ -112,7 +112,6 @@ const getByCategory = async (req, res) => {
   let recipes = [];
 
   console.log(category);
-
   if (typeof category === 'undefined') {
     recipes = await Recipe.find();
   } else {

@@ -21,8 +21,7 @@ const Login = () => {
             dolorem quae eos et? Corrupti, dicta impedit!
           </p>
         </div>
-        <form>
-          <div className='login-form'>
+        <form className='login-form'>
             <label htmlFor='email'>Email</label>
             <input
               type='text'
@@ -36,7 +35,6 @@ const Login = () => {
               placeholder='*******'
             />
             <button type='submit'>LOG IN</button>
-          </div>
         </form>
       </div>
     </>

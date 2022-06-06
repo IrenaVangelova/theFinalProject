@@ -9,6 +9,7 @@
     flex-direction: column;
     border-radius: 10px;
     box-shadow: 0px 10px 20px #00000012;
+    margin-top: 2rem;
   }
   .card-top {
     position: relative;
@@ -71,17 +72,17 @@
   }
 
   .card-time {
-    margin-right: 0.7rem;
+    margin-right: 0.8rem;
     color: var(--darkgrey);
   }
 
   .card-people {
-    margin-right: 0.7rem;
+    margin-right: 0.8rem;
     color: var(--darkgrey);
   }
 
   .card-stars {
-    margin-right: 0.7rem;
+    margin-right: 0.8rem;
     color: var(--darkgrey);
   }
 

@@ -10,7 +10,15 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/recipes?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false')
+const username = process.env.DB_USERNAME;
+const password = process.env.DB_PASSWORD;
+const cluster = process.env.CLUSTER;
+
+const connectionString = "mongodb+srv://" + username + ":" + password + cluster;
+
+mongoose.connect(connectionString);
+
+// mongoose.connect('mongodb+srv://<username>:<password>@cluster0.ggygt.mongodb.net/?retryWrites=true&w=majority')
 
 app.use(cors());
 app.use(logger('dev'));

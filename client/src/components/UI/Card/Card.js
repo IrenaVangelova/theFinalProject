@@ -21,15 +21,15 @@ const Card = (props) => {
                 </div>
                 <div className='card-icons'>
                     <div className='card-time'>
-                        <FontAwesomeIcon icon={faClock} color='gray' />{' '}
+                        <FontAwesomeIcon icon={faClock} color='#B8B8B8' style={{marginRight: "0.2rem"}}/>{' '}
                         {preparationTime} min
                     </div>
                     <div className='card-people'>
-                        <FontAwesomeIcon icon={faUtensils} color='gray' />{' '}
+                        <FontAwesomeIcon icon={faUtensils} color='#B8B8B8' style={{marginRight: "0.2rem"}}/>{' '}
                         {numberOfPeople} people
                     </div>
                     <div className='card-stars'>
-                        <FontAwesomeIcon icon={faStar} color='gray' /> 30
+                        <FontAwesomeIcon icon={faStar} color='#B8B8B8' style={{marginRight: "0.2rem"}}/>30
                     </div>
                     <div className='card-button'>
                         <button onClick={showModal}>

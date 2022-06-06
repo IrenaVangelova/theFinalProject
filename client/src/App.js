@@ -11,6 +11,8 @@ import Home from './pages/Home';
 import CreateUser from './pages/CreateUser/CreateUser';
 import Login from './pages/Login/Login';
 import Footer from './components/Footer/Footer';
+import MyProfile from './pages/MyProfile/MyProfile';
+import AddRecipe from './pages/AddRecipe/AddRecipe';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
             <Route path='/dinner' element={<Dinner />} />
             <Route path='/register' element={<CreateUser />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/profile' element={<MyProfile />} />
+            <Route path='/add' element={<AddRecipe />} />
           </Routes>
         </div>
         <Footer />

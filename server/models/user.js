@@ -10,8 +10,8 @@ const userSchema = mongoose.Schema({
     required: true
   },
   birthdate: {
-      type: Date,
-      required: true
+    type: Date,
+    required: true
   },
   email: {
     type: String,
@@ -32,7 +32,7 @@ const userSchema = mongoose.Schema({
   img: {
     data: Buffer,
     contentType: String
-  } 
+  }
 }, { timestamps: true });
 
 module.exports = mongoose.model('user', userSchema);

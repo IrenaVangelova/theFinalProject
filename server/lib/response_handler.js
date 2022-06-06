@@ -4,3 +4,4 @@ module.exports = (res, statusCode, message, args = {}) => {
         ...args
     });
 }
+
