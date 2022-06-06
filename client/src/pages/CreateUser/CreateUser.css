@@ -21,7 +21,7 @@ h1 {
     color: #A5A5A5;
 }
 
-form {
+.create-user-form {
     width: 65%;
     margin-left: 4rem;
     margin-top: 3rem;
@@ -30,21 +30,21 @@ form {
     align-content: flex-start;
 }
 
-.form-names {
+.register-form-names {
     display: flex;
     flex-direction: column;
     width: 45%;
     margin-bottom: 1rem;
 }
 
-.form-names > label {
+.register-form-names > label {
     font-family: Roboto Slab;
     font-weight: bolder;
     margin-bottom: 0.7rem;
     color: #F0972A;
 }
 
-.form-names > input {
+.register-form-names > input {
     padding: 5px;
     height: 1.7rem;
     border-radius: 5px;
@@ -56,7 +56,7 @@ form {
     color: #626262;
 }
 
-form > button {
+.create-user-form > button {
     font: normal normal 700 16px/45px Roboto;
     width: 28%;
     height: 2.7rem;

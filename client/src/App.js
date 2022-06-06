@@ -13,6 +13,7 @@ import Login from './pages/Login/Login';
 import Footer from './components/Footer/Footer';
 import MyProfile from './pages/MyProfile/MyProfile';
 import AddRecipe from './pages/AddRecipe/AddRecipe';
+import MyRecipes from './pages/MyRecipes/MyRecipes';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/profile' element={<MyProfile />} />
             <Route path='/add' element={<AddRecipe />} />
+            <Route path='/myRecipes' element={<MyRecipes />} />
           </Routes>
         </div>
         <Footer />

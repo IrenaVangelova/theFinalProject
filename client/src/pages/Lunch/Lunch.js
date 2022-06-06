@@ -8,7 +8,7 @@ const Lunch = (props) => {
 
   const get = () => {
     axios
-      .get("http://localhost:3000/recipes")
+      .get("http://localhost:5000/recipes/category/lunch")
       .then((res) => {
         setRecipes(res.data.recipes);
         console.log(res.data.recipes);

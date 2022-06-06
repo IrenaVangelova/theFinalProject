@@ -8,7 +8,7 @@ const Brunch = (props) => {
 
     const get = () => {
       axios
-        .get("http://localhost:3000/recipes")
+        .get("http://localhost:5000/recipes/category/brunch")
         .then((res) => {
           setRecipes(res.data.recipes);
           console.log(res.data.recipes);

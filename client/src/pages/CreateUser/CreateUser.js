@@ -32,8 +32,8 @@ const CreateUser = () => {
             adipisicing elit.
           </p>
         </div>
-        <form>
-          <div className='form-names'>
+        <form className='create-user-form'>
+          <div className='register-form-names'>
             <label htmlFor='firstName'>First Name</label>
             <input
               id='firstName'
@@ -42,7 +42,7 @@ const CreateUser = () => {
               onChange={handleInputChange}
             />
           </div>
-          <div className='form-names'>
+          <div className='register-form-names'>
             <label htmlFor='lastName'>Last Name</label>
             <input
               id='lastName'
@@ -51,7 +51,7 @@ const CreateUser = () => {
               onChange={handleInputChange}
             />
           </div>
-          <div className='form-names'>
+          <div className='register-form-names'>
             <label htmlFor='email'>Email</label>
             <input
               id='email'
@@ -60,7 +60,7 @@ const CreateUser = () => {
               onChange={handleInputChange}
             />
           </div>
-          <div className='form-names'>
+          <div className='register-form-names'>
             <label htmlFor='birthday'>Birthday</label>
             <input
               type='date'
@@ -69,7 +69,7 @@ const CreateUser = () => {
               onChange={handleInputChange}
             />
           </div>
-          <div className='form-names'>
+          <div className='register-form-names'>
             <label htmlFor='password'>Password</label>
             <input
               type='password'
@@ -79,7 +79,7 @@ const CreateUser = () => {
               onChange={handleInputChange}
             />
           </div>
-          <div className='form-names'>
+          <div className='register-form-names'>
             <label htmlFor='passwordRepeat'>Repeat Password</label>
             <input
               type='password'
