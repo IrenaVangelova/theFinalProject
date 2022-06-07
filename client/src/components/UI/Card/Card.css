@@ -3,13 +3,14 @@
   }
   
   .card-wrapper {
-    width: 30%;
+    width: 29%;
     height: 28rem;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
     box-shadow: 0px 10px 20px #00000012;
     margin-top: 2rem;
+    margin-right: 3rem;
   }
   .card-top {
     position: relative;

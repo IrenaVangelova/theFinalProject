@@ -28,11 +28,23 @@ const AddRecipe = () => {
             <div className='form-inside'>
               <div className='form-names'>
                 <label htmlFor='category'>Category</label>
-                <input
-                  type='date'
-                  id='category'
-                  name='category'
-                />
+                <select id='category' name='category'>
+                  <option selected="selected">
+                    Select
+                  </option>
+                  <option value='Breakfast'>
+                  Breakfast
+                  </option>
+                  <option value='Brunch'>
+                  Brunch
+                  </option>
+                  <option value='Dinner'>
+                  Brunch
+                  </option>
+                  <option value='Lunch'>
+                    Lunch
+                  </option>
+                </select>
               </div>
               <div className='form-names'>
                 <label htmlFor='prepTime'>Preparation Time</label>

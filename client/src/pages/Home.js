@@ -64,7 +64,7 @@ const Home = () => {
         className="cards-fresh-and-new"
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
           marginTop: "2.5rem",
         }}
       >
@@ -91,7 +91,7 @@ const Home = () => {
         className="cards-fresh-and-new"
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
           marginTop: "2.5rem",
           flexWrap: "wrap"
         }}

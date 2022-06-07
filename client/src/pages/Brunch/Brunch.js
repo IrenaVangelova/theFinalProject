@@ -50,7 +50,7 @@ const Brunch = (props) => {
           className="cards-content"
           style={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "flex-start",
             marginTop: "1rem",
             flexWrap: "wrap"
           }}

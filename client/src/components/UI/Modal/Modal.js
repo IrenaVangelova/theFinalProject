@@ -36,19 +36,19 @@ const Modal = (props) => {
             <div className="modal">
                 <div className="modal-container">
                     <div className="modal-header">
-                        <h5>{item.title}</h5>
-                        <button onClick={closeModal}>
+                        <h2>{item.title}</h2>
+                        <div onClick={closeModal} style={{marginTop: "1rem"}}>
                             <FontAwesomeIcon icon={faX} color='gray' />
-                        </button>
+                        </div>
                     </div>
                     <div className="modal-body">
                         <div className="modal-left">
-                            <img src="https://www.garciadepou.com/blog/wp-content/uploads/2016/08/pizza.jpg" alt="image" />
+                            <img className="modal-img" src="https://www.garciadepou.com/blog/wp-content/uploads/2016/08/pizza.jpg" alt="image" />
                             <div className="category-info">
                                 <h5>Best Served For</h5>
                                 <div className='type-recipe'>{item.category}</div>
                             </div>
-                            <p>{item.shortDescription}</p>
+                            <p style={{ color: "gray"}}>{item.shortDescription}</p>
                             <div className='card-icons'>
                                 <div className='card-time'>
                                     <FontAwesomeIcon icon={faClock} color='gray' />{' '}
@@ -64,10 +64,10 @@ const Modal = (props) => {
                             </div>
                         </div>
                         <div className="modal-right">
-                            <h5>
-                                Recipe Details
-                            </h5>
-                            <p>
+                            <div className="recipe-details">
+                                <p>Recipe Details</p>
+                            </div>
+                            <p style={{ color: "gray"}}>
                                 {item.description}
                             </p>
                         </div>

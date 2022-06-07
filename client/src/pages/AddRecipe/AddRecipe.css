@@ -71,6 +71,18 @@
     color: #626262;
 }
 
+.form-names > select {
+    padding: 5px;
+    height: 2.5rem;
+    width: 90%;
+    border-radius: 5px;
+    font-family: Roboto Slab;
+    font-weight: bold;
+    border: 1px solid #A5A5A5;
+    background: #F0EFEA;
+    color: #626262;
+}
+
 .form-info > button {
     font: normal normal 700 16px/45px Roboto;
     width: 22%;
