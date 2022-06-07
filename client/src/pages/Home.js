@@ -39,13 +39,23 @@ const Home = () => {
     getPopular();
   }, []);
 
-  const openModal = () => {
+  const openModalHandler = (event) => {
+    setModalData(event.currentTarget.id);
     setShowModal(true);
   };
 
-  const closeModal = () => {
+  const closeModalHandler = () => {
     setShowModal(false);
+    setModalData({});
   };
+
+  let modal = null;
+
+  if (showModal === true) {
+    modal = <Modal closeModal={closeModalHandler} show={showModal} data={modalData}/>;
+  } else {
+    modal = null;
+  }
 
   return (
     <>
@@ -62,6 +72,7 @@ const Home = () => {
           return (
             <Card
               key={item._id}
+              id={item._id}
               imgUrl={
                 "https://www.garciadepou.com/blog/wp-content/uploads/2016/08/pizza.jpg"
               }
@@ -70,6 +81,7 @@ const Home = () => {
               shortDescription={item.shortDescription}
               preparationTime={item.preparationTime}
               numberOfPeople={item.numberOfPeople}
+              openModal={openModalHandler}
             />
           );
         })}
@@ -88,6 +100,7 @@ const Home = () => {
           return (
             <Card
               key={item._id}
+              id={item._id}
               imgUrl={
                 "https://www.garciadepou.com/blog/wp-content/uploads/2016/08/pizza.jpg"
               }
@@ -96,10 +109,16 @@ const Home = () => {
               shortDescription={item.shortDescription}
               preparationTime={item.preparationTime}
               numberOfPeople={item.numberOfPeople}
+              openModal={openModalHandler}
             />
           );
         })}
       </div>
+
+      {modal}
+
+      
+     
     </>
   );
 };

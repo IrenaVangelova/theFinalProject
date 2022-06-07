@@ -26,8 +26,7 @@ const byId = async (req, res) => {
 const create = async (req, res) => {
 
   const recipe = await Recipe.create({
-    ...req.body,
-    user: req.params.id
+    ...req.body
   });
 
   await User.findByIdAndUpdate(req.body.userId, {
@@ -123,6 +122,16 @@ const getByCategory = async (req, res) => {
   });
 };
 
+const myRecipes = async (req,res) => {
+  const user = req.body.user;
+  let recipes = await Recipe.find({ user: user});
+
+  res.send({
+    error: false,
+    recipes: recipes
+  });
+};
+
 module.exports = {
   all,
   byId,
@@ -132,5 +141,6 @@ module.exports = {
   addToFavourites,
   getMostPopular,
   getLatest,
-  getByCategory
+  getByCategory,
+  myRecipes
 }

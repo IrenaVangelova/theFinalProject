@@ -8,7 +8,7 @@ import {
 import './Card.css';
 
 const Card = (props) => {
-    const { imgUrl, title, category, shortDescription, preparationTime, numberOfPeople, showModal } = props;
+    const { imgUrl, title, category, shortDescription, preparationTime, numberOfPeople, openModal } = props;
     return (
         <div className='card-wrapper'>
             <div className='card-top' style={{ backgroundImage: `url(${imgUrl})` }}>
@@ -32,7 +32,7 @@ const Card = (props) => {
                         <FontAwesomeIcon icon={faStar} color='#B8B8B8' style={{marginRight: "0.2rem"}}/>30
                     </div>
                     <div className='card-button'>
-                        <button onClick={showModal}>
+                        <button onClick={openModal} id={props.id}>
                             <FontAwesomeIcon icon={faAnglesRight} color='white' />
                         </button>
                     </div>

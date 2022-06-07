@@ -1,11 +1,11 @@
-import SectionTitle from '../../components/sectionTitle';
+import AddRecipeTitle from '../../components/AddRecipeTitle';
 import './AddRecipe.css';
 import avatar from '../../components/UI/images/1.jpg';
 
 const AddRecipe = () => {
   return (
     <>
-      <SectionTitle title={'My Recipes'} />
+      <AddRecipeTitle title={'My Recipes'} />
 
         <form className='recipe-form'>
           <div className='img-info'>
