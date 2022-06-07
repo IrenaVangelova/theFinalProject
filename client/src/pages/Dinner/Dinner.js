@@ -2,9 +2,12 @@ import SectionTitle from '../../components/sectionTitle';
 import Card from '../../components/UI/Card/Card';
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Modal from "../../components/UI/Modal/Modal";
 
 const Dinner = (props) => {
     const [recipes, setRecipes] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [modalData, setModalData] = useState({});
 
     const get = () => {
       axios
@@ -22,6 +25,25 @@ const Dinner = (props) => {
       get();
     }, []);
 
+    
+  const openModalHandler = (event) => {
+    setModalData(event.currentTarget.id);
+    setShowModal(true);
+  };
+
+  const closeModalHandler = () => {
+    setShowModal(false);
+    setModalData({});
+  };
+
+  let modal = null;
+
+  if (showModal === true) {
+    modal = <Modal closeModal={closeModalHandler} show={showModal} data={modalData}/>;
+  } else {
+    modal = null;
+  }
+
     return (
       <div>
         <SectionTitle title={"Dinner"} />
@@ -38,6 +60,7 @@ const Dinner = (props) => {
             return (
               <Card
                 key={item._id}
+                id={item._id}
                 imgUrl={
                   "https://www.garciadepou.com/blog/wp-content/uploads/2016/08/pizza.jpg"
                 }
@@ -46,10 +69,12 @@ const Dinner = (props) => {
                 shortDescription={item.shortDescription}
                 preparationTime={item.preparationTime}
                 numberOfPeople={item.numberOfPeople}
+                openModal={openModalHandler}
               />
             );
           })}
         </div>
+        {modal}
       </div>
     );
 }
