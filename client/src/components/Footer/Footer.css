@@ -40,6 +40,7 @@
   color: var(--midgrey);
   text-transform: var(--unnamed-text-transform-uppercase);
 }
+
 .unnamed-character-style-2 {
   font-family: var(--unnamed-font-family-roboto-slab);
   font-style: var(--unnamed-font-style-normal);
@@ -49,6 +50,7 @@
   letter-spacing: var(--unnamed-character-spacing-0);
   color: var(--midgrey);
 }
+
 .unnamed-character-style-3 {
   font-family: var(--unnamed-font-family-roboto);
   font-style: var(--unnamed-font-style-normal);
@@ -58,6 +60,7 @@
   letter-spacing: var(--unnamed-character-spacing-0);
   color: var(--midgrey);
 }
+
 .unnamed-character-style-4 {
   font-family: var(--unnamed-font-family-roboto-slab);
   font-style: var(--unnamed-font-style-normal);
@@ -67,6 +70,7 @@
   letter-spacing: var(--unnamed-character-spacing-0);
   color: var(--orange);
 }
+
 .unnamed-character-style-5 {
   font-family: var(--unnamed-font-family-roboto-slab);
   font-style: var(--unnamed-font-style-normal);
@@ -114,14 +118,12 @@
   font-size: 0.9rem;
   font-family: 'Roboto Slab';
   font-weight: 600;
-  display:inline-block;
+  display: inline-block;
 
 }
 
 .footer-links a {
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
-    var(--unnamed-font-size-18) / var(--unnamed-line-spacing-24)
-    var(--unnamed-font-family-roboto);
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-18) / var(--unnamed-line-spacing-24) var(--unnamed-font-family-roboto);
   letter-spacing: var(--unnamed-character-spacing-0);
   color: var(--white);
   text-align: left;
@@ -131,6 +133,7 @@
   text-decoration: none;
   opacity: 1;
 }
+
 .footer-links span {
   margin-left: 0.5rem;
 }

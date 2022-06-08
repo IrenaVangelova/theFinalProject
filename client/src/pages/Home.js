@@ -3,13 +3,15 @@ import SectionTitle from "../components/sectionTitle";
 import Card from "../components/UI/Card/Card";
 import Modal from "../components/UI/Modal/Modal";
 import axios from "axios";
+// import Pagination from "../components/UI/Pagination/Pagination";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({});
-
   const [latest, setLatest] = useState([]);
   const [popular, setPopular] = useState([]);
+  //   const [currentPage, setCurrentPage]= useState(1);
+  //   const [recipesPerPage]= useState(3);
 
   const getLatest = () => {
     axios
@@ -52,10 +54,14 @@ const Home = () => {
   let modal = null;
 
   if (showModal === true) {
-    modal = <Modal closeModal={closeModalHandler} show={showModal} data={modalData}/>;
+    modal = <Modal closeModal={closeModalHandler} show={showModal} data={modalData} />;
   } else {
     modal = null;
   }
+
+  //   const indexOfLastRecipe = currentPage * recipesPerPage;
+  //   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+  //   const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
   return (
     <>
@@ -86,6 +92,14 @@ const Home = () => {
           );
         })}
       </div>
+      {/* <div>
+        <ul>
+          {renderTodos}
+        </ul>
+        <ul id="page-numbers">
+          {renderPageNumbers}
+        </ul>
+      </div> */}
       <SectionTitle title={"Most Popular Recipes"} />
       <div
         className="cards-fresh-and-new"
@@ -117,8 +131,8 @@ const Home = () => {
 
       {modal}
 
-      
-     
+
+
     </>
   );
 };

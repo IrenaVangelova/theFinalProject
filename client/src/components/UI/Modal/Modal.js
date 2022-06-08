@@ -37,7 +37,7 @@ const Modal = (props) => {
                 <div className="modal-container">
                     <div className="modal-header">
                         <h2>{item.title}</h2>
-                        <div onClick={closeModal} style={{marginTop: "1rem"}}>
+                        <div onClick={closeModal} style={{ marginTop: "1rem" }}>
                             <FontAwesomeIcon icon={faX} color='gray' />
                         </div>
                     </div>
@@ -45,10 +45,10 @@ const Modal = (props) => {
                         <div className="modal-left">
                             <img className="modal-img" src="https://www.garciadepou.com/blog/wp-content/uploads/2016/08/pizza.jpg" alt="image" />
                             <div className="category-info">
-                                <h5>Best Served For</h5>
+                                <h4>Best Served For</h4>
                                 <div className='type-recipe'>{item.category}</div>
                             </div>
-                            <p style={{ color: "gray"}}>{item.shortDescription}</p>
+                            <p style={{ color: "gray" }}>{item.shortDescription}</p>
                             <div className='card-icons'>
                                 <div className='card-time'>
                                     <FontAwesomeIcon icon={faClock} color='gray' />{' '}
@@ -65,9 +65,9 @@ const Modal = (props) => {
                         </div>
                         <div className="modal-right">
                             <div className="recipe-details">
-                                <p>Recipe Details</p>
+                                <h4>Recipe Details</h4>
                             </div>
-                            <p style={{ color: "gray"}}>
+                            <p style={{ color: "gray" }}>
                                 {item.description}
                             </p>
                         </div>

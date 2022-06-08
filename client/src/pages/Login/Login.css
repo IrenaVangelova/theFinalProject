@@ -1,21 +1,21 @@
-.login-container{
+.login-container {
     display: flex;
     margin-top: 2rem;
     text-align: left;
 }
 
-.login-text-box{
+.login-text-box {
     width: 70%;
     padding-right: 4rem;
 }
 
-.login-text-box > h1 {
+.login-text-box>h1 {
     font-size: 42px;
     color: #F0972A;
     font-family: Roboto Slab;
 }
 
-.login-text-box > p {
+.login-text-box>p {
     font-size: 18px;
     color: #A5A5A5;
     font-family: Roboto Slab;
@@ -28,14 +28,14 @@
     flex-direction: column;
 }
 
-.login-form > label {
+.login-form>label {
     font-family: Roboto Slab;
     font-weight: bolder;
     margin-bottom: 0.7rem;
     color: #F0972A;
 }
 
-.login-form > input {
+.login-form>input {
     padding: 5px;
     height: 1.7rem;
     border-radius: 5px;
@@ -48,7 +48,7 @@
     width: 70%;
 }
 
-.login-form > button {
+.login-form>button {
     font: normal normal 700 16px/40px Roboto;
     width: 35%;
     height: 2.5rem;

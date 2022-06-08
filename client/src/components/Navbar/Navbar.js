@@ -24,24 +24,24 @@ function Navbar() {
         <Link to='/dinner'>Dinner</Link>
       </div>
       <div className='nav-login-buttons'>
-          <Link to='/login'>
-            <button className='login-button'>LOG IN</button>
-          </Link>
-          <div
-            style={{
-              marginLeft: '1rem',
-              marginRight: '1rem',
-              fontSize: '1.05rem',
-              font: 'normal normal 900 16px/21px Roboto',
-              color: '#f0972a',
-            }}
-          >
-            or
-          </div>
-          <Link to='/register'>
-            <button className='register-button'>CREATE ACCOUNT</button>
-          </Link>
+        <Link to='/login'>
+          <button className='login-button'>LOG IN</button>
+        </Link>
+        <div
+          style={{
+            marginLeft: '1rem',
+            marginRight: '1rem',
+            fontSize: '1.05rem',
+            font: 'normal normal 900 16px/21px Roboto',
+            color: '#f0972a',
+          }}
+        >
+          or
         </div>
+        <Link to='/register'>
+          <button className='register-button'>CREATE ACCOUNT</button>
+        </Link>
+      </div>
     </div>
   );
 }

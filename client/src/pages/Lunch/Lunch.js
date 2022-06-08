@@ -39,7 +39,7 @@ const Lunch = (props) => {
   let modal = null;
 
   if (showModal === true) {
-    modal = <Modal closeModal={closeModalHandler} show={showModal} data={modalData}/>;
+    modal = <Modal closeModal={closeModalHandler} show={showModal} data={modalData} />;
   } else {
     modal = null;
   }
@@ -53,7 +53,7 @@ const Lunch = (props) => {
           justifyContent: "flex-start",
           marginTop: "1rem",
           flexWrap: "wrap",
-          
+
         }}
       >
         {recipes.map((item) => {

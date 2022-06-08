@@ -1,5 +1,5 @@
 import SectionTitle from '../../components/sectionTitle';
-import './Login.css'
+import './Login.css';
 
 const Login = () => {
 
@@ -22,19 +22,19 @@ const Login = () => {
           </p>
         </div>
         <form className='login-form'>
-            <label htmlFor='email'>Email</label>
-            <input
-              type='text'
-              id='email'
-              placeholder='user@domain.com'
-            />
-            <label htmlFor='password'>Password</label>
-            <input
-              type='password'
-              id='password'
-              placeholder='*******'
-            />
-            <button type='submit'>LOG IN</button>
+          <label htmlFor='email'>Email</label>
+          <input
+            type='text'
+            id='email'
+            placeholder='user@domain.com'
+          />
+          <label htmlFor='password'>Password</label>
+          <input
+            type='password'
+            id='password'
+            placeholder='*******'
+          />
+          <button type='submit'>LOG IN</button>
         </form>
       </div>
     </>

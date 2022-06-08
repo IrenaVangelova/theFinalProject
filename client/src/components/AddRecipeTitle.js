@@ -16,8 +16,8 @@ const AddRecipeTitle = (props) => {
                     marginLeft: '2rem',
                 }}
             ></div>
-            <Link to="/myRecipes"><div style={{ background: "var(--orange)", boxShadow: "0px 3px 6px #00000029", width: "41px", height: "41px", borderRadius: "50%" ,marginLeft: "0.5rem"}}>
-                    <FontAwesomeIcon icon={faReply} color='var(--white)' style={{ width: "19.6px", height: "40.1px" }}/>
+            <Link to="/myRecipes"><div style={{ background: "var(--orange)", boxShadow: "0px 3px 6px #00000029", width: "41px", height: "41px", borderRadius: "50%", marginLeft: "0.5rem" }}>
+                <FontAwesomeIcon icon={faReply} color='var(--white)' style={{ width: "19.6px", height: "40.1px" }} />
             </div>
             </Link>
         </div>

@@ -54,7 +54,7 @@ const MyRecipes = () => {
               <td>{item.title}</td>
               <td>{item.category}</td>
               <td>{item.createdOn}</td>
-              <td><FontAwesomeIcon icon={faTrashCan} color="gray" style={{ width: "16.6px", height: "30.1px",  cursor: "pointer"}} onClick={deleteHandler} /></td>
+              <td><FontAwesomeIcon icon={faTrashCan} color="gray" style={{ width: "16.6px", height: "30.1px", cursor: "pointer" }} onClick={deleteHandler} /></td>
             </tr>
           );
         })}

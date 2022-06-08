@@ -1,5 +1,5 @@
 .register-wrapper {
-    display: flex; 
+    display: flex;
     margin-top: 2rem;
     text-align: left;
 }
@@ -15,7 +15,7 @@ h1 {
     font-family: Roboto Slab;
 }
 
-.register-textbox > p {
+.register-textbox>p {
     font-family: Roboto Slab;
     font-size: 20px;
     color: #A5A5A5;
@@ -37,14 +37,14 @@ h1 {
     margin-bottom: 1rem;
 }
 
-.register-form-names > label {
+.register-form-names>label {
     font-family: Roboto Slab;
     font-weight: bolder;
     margin-bottom: 0.7rem;
     color: #F0972A;
 }
 
-.register-form-names > input {
+.register-form-names>input {
     padding: 5px;
     height: 1.7rem;
     border-radius: 5px;
@@ -56,7 +56,7 @@ h1 {
     color: #626262;
 }
 
-.create-user-form > button {
+.create-user-form>button {
     font: normal normal 700 16px/45px Roboto;
     width: 28%;
     height: 2.7rem;

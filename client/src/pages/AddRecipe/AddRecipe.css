@@ -6,25 +6,25 @@
     text-align: left;
 }
 
-.img-info{
+.img-info {
     display: inline-block;
     font-family: Roboto Slab;
     width: 20%;
 }
 
-.recipe-info{
+.recipe-info {
     font-family: Roboto Slab;
     width: 35%;
 }
 
-.recipe-info > h4 {
+.recipe-info>h4 {
     font-family: Roboto Slab;
     font-weight: bolder;
     margin-bottom: 0.7rem;
     color: #F0972A;
 }
 
-.recipe-info > textarea {
+.recipe-info>textarea {
     padding: 5px;
     height: 18rem;
     width: 22rem;
@@ -37,7 +37,7 @@
     text-align: left;
 }
 
-.img-info > h4 {
+.img-info>h4 {
     font-family: Roboto Slab;
     font-weight: bolder;
     margin-bottom: 0.7rem;
@@ -52,14 +52,14 @@
     margin-top: 1.33rem;
 }
 
-.form-names > label {
+.form-names>label {
     font-family: Roboto Slab;
     font-weight: bolder;
     margin-bottom: 0.7rem;
     color: #F0972A;
 }
 
-.form-names > input {
+.form-names>input {
     padding: 5px;
     height: 1.7rem;
     width: 90%;
@@ -71,7 +71,7 @@
     color: #626262;
 }
 
-.form-names > select {
+.form-names>select {
     padding: 5px;
     height: 2.5rem;
     width: 90%;
@@ -83,7 +83,7 @@
     color: #626262;
 }
 
-.form-info > button {
+.form-info>button {
     font: normal normal 700 16px/45px Roboto;
     width: 22%;
     height: 2.7rem;
@@ -101,16 +101,16 @@
     width: 45%;
 }
 
-.form-inside{
+.form-inside {
     display: flex;
     flex-direction: row;
 }
 
-.form-inside > .form-names > input{
+.form-inside>.form-names>input {
     width: 8rem;
 }
 
-.form-names-shortDesp{
+.form-names-shortDesp {
     display: flex;
     flex-direction: column;
     margin-bottom: 0.7rem;
@@ -118,14 +118,14 @@
     margin-top: 1rem;
 }
 
-.form-names-shortDesp > label {
+.form-names-shortDesp>label {
     font-family: Roboto Slab;
     font-weight: bolder;
     margin-bottom: 0.7rem;
     color: #F0972A;
 }
 
-.form-names-shortDesp > textarea {
+.form-names-shortDesp>textarea {
     display: inline-block;
     text-align: left;
     height: 5rem;

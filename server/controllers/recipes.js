@@ -50,7 +50,7 @@ const remove = async (req, res) => {
   await Recipe.findByIdAndDelete(req.params.id);
 };
 
-const addToFavourites = async (req,res) => {
+const addToFavourites = async (req, res) => {
 
   if (req.body) {
     res.send({
@@ -60,16 +60,16 @@ const addToFavourites = async (req,res) => {
     return;
   }
 
-  const recipe = Recipe.findByIdAndUpdate( req.body.recipeId , 
-    { $inc: {'recipe.likes': 1}}).exec((err, result) => {
+  const recipe = Recipe.findByIdAndUpdate(req.body.recipeId,
+    { $inc: { 'recipe.likes': 1 } }).exec((err, result) => {
       if (err) {
-        return res.status(400).json({error: err})
-      } 
+        return res.status(400).json({ error: err })
+      }
       else {
         res.json(result);
       }
     });
-  
+
   await User.findByIdAndUpdate(req.body.userId, {
     $push: { likedRecipes: req.body.recipeId },
   });
@@ -81,24 +81,24 @@ const addToFavourites = async (req,res) => {
   });
 };
 
-const getMostPopular = async (req,res) => {
-  const recipes = await Recipe.find().sort({likes: -1});
+const getMostPopular = async (req, res) => {
+  const recipes = await Recipe.find().sort({ likes: -1 });
 
   res.send({
     error: false,
     message: `All recipes from the database`,
-    recipes: recipes.slice(0,6)
+    recipes: recipes.slice(0, 6)
   });
 };
 
-const getLatest = async (req,res) => {
+const getLatest = async (req, res) => {
 
-  const recipes = await Recipe.find().sort({createdOn: -1});
+  const recipes = await Recipe.find().sort({ createdOn: -1 });
 
   res.send({
     error: false,
     message: `All recipes from the database`,
-    recipes: recipes.slice(0,3)
+    recipes: recipes.slice(0, 3)
   });
 
 };
@@ -122,9 +122,9 @@ const getByCategory = async (req, res) => {
   });
 };
 
-const myRecipes = async (req,res) => {
+const myRecipes = async (req, res) => {
   const user = req.body.user;
-  let recipes = await Recipe.find({ user: user});
+  let recipes = await Recipe.find({ user: user });
 
   res.send({
     error: false,

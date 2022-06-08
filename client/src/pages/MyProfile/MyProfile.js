@@ -1,6 +1,6 @@
 import SectionTitle from '../../components/sectionTitle';
 import './MyProfile.css'
-import avatar from '../../components/UI/images/1.jpg'
+import avatar from '../../components/UI/images/1.jpg';
 
 const MyProfile = () => {
 

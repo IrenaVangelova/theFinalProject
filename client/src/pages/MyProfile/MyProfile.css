@@ -9,7 +9,7 @@ h1 {
     font-family: Roboto Slab;
 }
 
-.profile-textbox > p {
+.profile-textbox>p {
     font-family: Roboto Slab;
     font-size: 20px;
     color: #A5A5A5;
@@ -29,11 +29,11 @@ h1 {
     text-align: left;
 }
 
-.first-three{
+.first-three {
     width: 100%;
 }
 
-.last-three{
+.last-three {
     width: 100%;
 }
 
@@ -43,14 +43,14 @@ h1 {
     margin-bottom: 1rem;
 }
 
-.profile-form-names > label {
+.profile-form-names>label {
     font-family: Roboto Slab;
     font-weight: bolder;
     margin-bottom: 0.7rem;
     color: #F0972A;
 }
 
-.profile-form-names > input {
+.profile-form-names>input {
     padding: 5px;
     height: 1.7rem;
     border-radius: 5px;
@@ -62,7 +62,7 @@ h1 {
     color: #626262;
 }
 
-.first-three > button {
+.first-three>button {
     font: normal normal 700 16px/40px Roboto;
     width: 40%;
     height: 2.5rem;

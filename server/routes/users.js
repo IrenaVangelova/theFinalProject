@@ -7,17 +7,17 @@ const response = require('../lib/response_handler');
 require('dotenv').config();
 
 router.use(jwt({
-  secret: process.env.JWT_SECRET_KEY,
-  algorithms: ['HS256'] 
+      secret: process.env.JWT_SECRET_KEY,
+      algorithms: ['HS256']
 }).unless({
-  path: [
-        {
-              url: '/users/register', methods: ['POST']
-        },
-        {
-              url: '/users/login', methods: ['POST']
-        }
-  ]
+      path: [
+            {
+                  url: '/users/register', methods: ['POST']
+            },
+            {
+                  url: '/users/login', methods: ['POST']
+            }
+      ]
 }));
 
 router.use((err, req, res, next) => {
