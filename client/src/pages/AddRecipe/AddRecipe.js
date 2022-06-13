@@ -22,9 +22,7 @@ const AddRecipe = () => {
       let shortDescription = event.target[4].value;
       let description = event.target[6].value;
       // let user = currentUser.userId;
-      let user = "628e91c004f16d23219ef63d";
-
-      console.log(title);
+      let user = "629f3b53744f5cb58ea7b6a4";
 
     axios.post("http://localhost:5000/recipes/create", { title, category, preparationTime, numberOfPeople, shortDescription, description, user })
     .then((response) => {
@@ -70,7 +68,7 @@ const AddRecipe = () => {
                   Brunch
                 </option>
                 <option value='Dinner'>
-                  Brunch
+                  Dinner
                 </option>
                 <option value='Lunch'>
                   Lunch

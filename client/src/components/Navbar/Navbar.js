@@ -7,6 +7,7 @@ import { useCurrentUser } from "../../Helpers/userContext";
 import { useEffect, useState } from 'react';
 
 function Navbar() {
+  
   const { currentUser, getUser } = useCurrentUser();
 
   useEffect(() => { 
@@ -38,7 +39,50 @@ function Navbar() {
         <Link to='/dinner'>Dinner</Link>
       </div>
       {currentUser ? (
-          <button className='login-button' onClick={logoutHandler}>LOG OUT</button>) 
+          <div className='logged-in-navigation'>
+          <Link
+            to={`/myRecipes`}
+            style={{
+              borderBottom: '2px solid #A5A5A5',
+              color: '#96BB36',
+            }}
+          >
+            MY RECIPES
+          </Link>
+          <FontAwesomeIcon
+            icon={faCircle}
+            color='#626262'
+            className='logged-in-nav-icons'
+          />
+          <Link
+            to={`/profile`}
+            style={{
+              borderBottom: '2px solid #A5A5A5',
+              paddingBottom: '1px',
+              color: '#F0972A',
+            }}
+          >
+            MY PROFILE
+          </Link>
+          <FontAwesomeIcon
+            icon={faCircle}
+            color='#626262'
+            className='logged-in-nav-icons'
+          />
+          <Link
+            to='/'
+            style={{
+              borderBottom: '2px solid #A5A5A5',
+              paddingBottom: '1px',
+              color: '#B5B5B4',
+            }}
+            onClick={() => {
+              logoutHandler();
+            }}
+          >
+            LOG OUT
+          </Link>
+        </div>) 
           : (      <div className='nav-login-buttons'>
         <Link to='/login'>
           <button className='login-button'>LOG IN</button>
@@ -57,7 +101,8 @@ function Navbar() {
         <Link to='/register'>
           <button className='register-button'>CREATE ACCOUNT</button>
         </Link>
-      </div>)}
+      </div>
+      )}
 
     </div>
   );

@@ -95,6 +95,7 @@
     background: #96BB36 0% 0% no-repeat padding-box;
     font-size: 16px;
     color: #FFFFFF;
+    cursor: pointer;
 }
 
 .form-info {

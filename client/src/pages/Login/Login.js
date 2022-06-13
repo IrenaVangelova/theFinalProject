@@ -1,9 +1,9 @@
 import SectionTitle from '../../components/sectionTitle';
 import './Login.css';
 import axios from 'axios';
-import { useNavigate  } from 'react-router-dom';
 
 const Login = () => {
+
   const loginHandler = (event) => {
     event.preventDefault();
 
@@ -11,16 +11,16 @@ const Login = () => {
     let password = event.target[1].value;
 
     axios.post("http://localhost:5000/users/login", { email, password })
-    .then((response) => {
-      let data = {
-        token: response.data.token,
-        email: email,
-        userId: response.data.userId
-      }
-      localStorage.setItem("user", JSON.stringify(data));
-      // fali redirect
-    })
-    .catch((error) => console.log("error"));
+      .then((response) => {
+        let data = {
+          token: response.data.token,
+          email: email,
+          userId: response.data.userId
+        }
+        localStorage.setItem("user", JSON.stringify(data));
+        // fali redirect
+      })
+      .catch((error) => console.log("error"));
   };
 
   return (
@@ -41,24 +41,22 @@ const Login = () => {
             dolorem quae eos et? Corrupti, dicta impedit!
           </p>
         </div>
-        <form onSubmit={loginHandler}>
-          <div className='login-form'>
-            <label htmlFor='email'>Email</label>
-            <input
-              type='text'
-              id='email'
-              name='email'
-              placeholder='user@domain.com'
-            />
-            <label htmlFor='password'>Password</label>
-            <input
-              type='password'
-              id='password'
-              name='password'
-              placeholder='*******'
-            />
-            <button type='submit'>LOG IN</button>
-          </div>
+        <form className='login-form' onSubmit={loginHandler}>
+          <label htmlFor='email'>Email</label>
+          <input
+            type='text'
+            id='email'
+            name='email'
+            placeholder='user@domain.com'
+          />
+          <label htmlFor='password'>Password</label>
+          <input
+            type='password'
+            id='password'
+            name='password'
+            placeholder='*******'
+          />
+          <button type='submit'>LOG IN</button>
         </form>
       </div>
     </>

@@ -3,11 +3,25 @@ import Card from '../../components/UI/Card/Card';
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Modal from "../../components/UI/Modal/Modal";
+import Pagination from '../../components/UI/Pagination/Pagination';
 
 const Dinner = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({});
+  const [currentPage, setCurrentPage]= useState(1);
+  const [recipesPerPage]= useState(9);
+  
+
+  const indexOfLastRecipe = currentPage * recipesPerPage;
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+  const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+
+
+
+
+  
+  const paginate = pageNumber =>setCurrentPage(pageNumber)
 
   const get = () => {
     axios
@@ -70,11 +84,16 @@ const Dinner = (props) => {
               preparationTime={item.preparationTime}
               numberOfPeople={item.numberOfPeople}
               openModal={openModalHandler}
+              recipes={currentRecipes}
             />
           );
         })}
       </div>
       {modal}
+
+      <div className='homecontainer'>
+          <Pagination recipesPerPage={recipesPerPage} totalRecipes={recipes.length} paginate={paginate}/>
+        </div>
     </div>
   );
 }

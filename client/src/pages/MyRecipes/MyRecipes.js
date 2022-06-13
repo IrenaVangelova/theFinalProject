@@ -51,8 +51,13 @@ const MyRecipes = () => {
         {myRecipes.map((item) => {
           return (
             <tr className='table-info' key={item._id}>
-              <td>{item.title}</td>
-              <td>{item.category}</td>
+              <td style={{fontWeight: "bold", color: "var(--midgrey)"}}>{item.title}</td>
+              <td style={{font: "var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) 12px/22px var(--unnamed-font-family-roboto)",
+letterSpacing: "var(--unnamed-character-spacing-0)",
+color: "var(--white)",
+textAlign: "center",
+textTransform: "uppercase",
+opacity: "1"}}><div className='my-recipes-category'>{item.category}</div></td>
               <td>{item.createdOn}</td>
               <td><FontAwesomeIcon icon={faTrashCan} color="gray" style={{ width: "16.6px", height: "30.1px", cursor: "pointer" }} onClick={deleteHandler} /></td>
             </tr>

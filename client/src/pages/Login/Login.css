@@ -5,7 +5,7 @@
 }
 
 .login-text-box {
-    width: 70%;
+    width: 65%;
     padding-right: 4rem;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .login-form {
-    width: 45%;
+    width: 35%;
     margin: 0.5rem 3rem;
     display: flex;
     flex-direction: column;
@@ -45,7 +45,7 @@
     background: #F0EFEA;
     color: #626262;
     margin-bottom: 1rem;
-    width: 70%;
+    width: 75%;
 }
 
 .login-form>button {
@@ -60,4 +60,5 @@
     background: #96BB36 0% 0% no-repeat padding-box;
     font-size: 16px;
     color: #FFFFFF;
+    cursor: pointer;
 }

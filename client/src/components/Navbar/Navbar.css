@@ -176,3 +176,33 @@
 .register-button:hover {
   cursor: pointer;
 }
+
+.logged-in-nav-icons {
+  margin-left: 0.8rem;
+  margin-right: 0.8rem;
+  font-size: 0.5rem;
+}
+
+.logged-in-navigation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5rem;
+}
+
+.logged-in-navigation a {
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold)
+    var(--unnamed-font-size-18) / var(--unnamed-line-spacing-24)
+    var(--unnamed-font-family-roboto);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--midgrey);
+  text-align: left;
+  font: normal normal bold 18px/24px Roboto;
+  letter-spacing: 0px;
+  color: #a5a5a5;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 1;
+  
+}
