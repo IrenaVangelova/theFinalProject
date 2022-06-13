@@ -14,9 +14,11 @@ import Footer from './components/Footer/Footer';
 import MyProfile from './pages/MyProfile/MyProfile';
 import AddRecipe from './pages/AddRecipe/AddRecipe';
 import MyRecipes from './pages/MyRecipes/MyRecipes';
+import { CurrentUserProvider } from './Helpers/userContext';
 
 function App() {
   return (
+    <CurrentUserProvider>
     <div className="App">
       <BrowserRouter>
         <div className="container">
@@ -37,6 +39,7 @@ function App() {
         <Footer />
       </BrowserRouter>
     </div>
+    </CurrentUserProvider>
   );
 }
 

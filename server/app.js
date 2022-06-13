@@ -17,6 +17,7 @@ const cluster = process.env.CLUSTER;
 const connectionString = "mongodb+srv://" + username + ":" + password + cluster;
 
 mongoose.connect(connectionString);
+// mongoose.connect("mongodb://localhost:27017/recipes?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false");
 
 // mongoose.connect('mongodb+srv://<username>:<password>@cluster0.ggygt.mongodb.net/?retryWrites=true&w=majority')
 

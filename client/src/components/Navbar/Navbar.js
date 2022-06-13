@@ -3,9 +3,23 @@ import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { iconStyle } from './NavigationStyles';
-
+import { useCurrentUser } from "../../Helpers/userContext";
+import { useEffect, useState } from 'react';
 
 function Navbar() {
+  const { currentUser, getUser } = useCurrentUser();
+
+  useEffect(() => { 
+    getUser();
+    console.log(currentUser);
+  }, []); 
+
+  const logoutHandler = () => {
+    localStorage.clear();
+    getUser();
+    // fali redirect
+  };
+
   return (
     <div className='nav-bar'>
       <Link to='/' style={{ textDecoration: 'none' }}>
@@ -23,7 +37,9 @@ function Navbar() {
         <FontAwesomeIcon icon={faCircle} color='#F0972A' style={iconStyle} />
         <Link to='/dinner'>Dinner</Link>
       </div>
-      <div className='nav-login-buttons'>
+      {currentUser ? (
+          <button className='login-button' onClick={logoutHandler}>LOG OUT</button>) 
+          : (      <div className='nav-login-buttons'>
         <Link to='/login'>
           <button className='login-button'>LOG IN</button>
         </Link>
@@ -41,7 +57,8 @@ function Navbar() {
         <Link to='/register'>
           <button className='register-button'>CREATE ACCOUNT</button>
         </Link>
-      </div>
+      </div>)}
+
     </div>
   );
 }

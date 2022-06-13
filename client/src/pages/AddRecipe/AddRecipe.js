@@ -1,13 +1,44 @@
 import AddRecipeTitle from '../../components/AddRecipeTitle';
 import './AddRecipe.css';
 import avatar from '../../components/UI/images/1.jpg';
+import axios from 'axios';
+import { useCurrentUser } from '../../Helpers/userContext';
+import { useEffect } from 'react';
 
 const AddRecipe = () => {
+  const { currentUser, getUser } = useCurrentUser();
+
+  useEffect(() => { 
+    getUser();
+  }, []); 
+
+  const addRecipeHandler = (event) => {
+    event.preventDefault();
+
+      let title = event.target[0].value;
+      let category = event.target[1].value;
+      let preparationTime = event.target[2].value;
+      let numberOfPeople = event.target[3].value;
+      let shortDescription = event.target[4].value;
+      let description = event.target[6].value;
+      // let user = currentUser.userId;
+      let user = "628e91c004f16d23219ef63d";
+
+      console.log(title);
+
+    axios.post("http://localhost:5000/recipes/create", { title, category, preparationTime, numberOfPeople, shortDescription, description, user })
+    .then((response) => {
+      console.log(response);
+      alert("OK");
+    })
+    .catch((error) => console.log("error"));
+  };
+
   return (
     <>
       <AddRecipeTitle title={'My Recipes'} />
 
-      <form className='recipe-form'>
+      <form onSubmit={addRecipeHandler} className='recipe-form'>
         <div className='img-info'>
           <h4 htmlFor='recipeImg'>Recipe Image</h4>
           <img src={avatar} alt="Avatar" />

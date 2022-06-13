@@ -37,6 +37,9 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
+
+    let userId = user._id;
+
     if (user) {
       if (bcrypt.compareSync(req.body.password, user.password)) {
         // token = plain data (JSON payload) + secret key za potpisuvanje na token + config options
@@ -50,7 +53,7 @@ const login = async (req, res) => {
           expiresIn: '50m'
         });
 
-        response(res, 200, 'You have logged in successfully', { token })
+        response(res, 200, 'You have logged in successfully', { token, userId })
       } else {
         response(res, 401, 'Invalid credentials');
       }
