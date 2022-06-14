@@ -3,9 +3,13 @@ import SectionTitle from "../components/sectionTitle";
 import Card from "../components/UI/Card/Card";
 import Modal from "../components/UI/Modal/Modal";
 import axios from "axios";
+import { useCurrentUser } from "../Helpers/userContext";
+import { useNavigate } from "react-router-dom";
 // import Pagination from "../components/UI/Pagination/Pagination";
 
 const Home = () => {
+  const [currentUser, getUser] = useCurrentUser();
+
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({});
   const [latest, setLatest] = useState([]);
@@ -13,11 +17,16 @@ const Home = () => {
   //   const [currentPage, setCurrentPage]= useState(1);
   //   const [recipesPerPage]= useState(3);
 
+  const navigation = useNavigate();
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   const getLatest = () => {
     axios
       .get("http://localhost:5000/recipes/latest")
       .then((res) => {
-        console.log(res.data.recipes);
         setLatest(res.data.recipes);
       })
       .catch((err) => {
@@ -51,10 +60,37 @@ const Home = () => {
     setModalData({});
   };
 
+  const likeHandler = (event) => {
+    if (
+      typeof currentUser === undefined ||
+      currentUser === null ||
+      currentUser.token === null
+    ) {
+      navigation("/login");
+    } else {
+      let recipeId = event.currentTarget.id;
+      let userId = currentUser.userId;
+
+      axios
+        .post("http://localhost:5000/recipes/like", { recipeId, userId })
+        .then((response) => {})
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   let modal = null;
 
   if (showModal === true) {
-    modal = <Modal closeModal={closeModalHandler} show={showModal} data={modalData} />;
+    modal = (
+      <Modal
+        closeModal={closeModalHandler}
+        show={showModal}
+        data={modalData}
+        like={likeHandler}
+      />
+    );
   } else {
     modal = null;
   }
@@ -86,8 +122,10 @@ const Home = () => {
               category={item.category}
               shortDescription={item.shortDescription}
               preparationTime={item.preparationTime}
+              likes={item.likes}
               numberOfPeople={item.numberOfPeople}
               openModal={openModalHandler}
+              like={likeHandler}
             />
           );
         })}
@@ -107,7 +145,7 @@ const Home = () => {
           display: "flex",
           justifyContent: "flex-start",
           marginTop: "2.5rem",
-          flexWrap: "wrap"
+          flexWrap: "wrap",
         }}
       >
         {popular.map((item) => {
@@ -123,16 +161,14 @@ const Home = () => {
               shortDescription={item.shortDescription}
               preparationTime={item.preparationTime}
               numberOfPeople={item.numberOfPeople}
+              likes={item.likes}
               openModal={openModalHandler}
+              like={likeHandler}
             />
           );
         })}
       </div>
-
       {modal}
-
-
-
     </>
   );
 };

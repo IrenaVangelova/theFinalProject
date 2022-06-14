@@ -4,6 +4,14 @@ const bcrypt = require('bcryptjs');
 const response = require('../lib/response_handler');
 const jwt = require('jsonwebtoken');
 
+const getAllUsers = async (req, res) => {
+  const users = await User.find().populate("likedRecipes");
+
+  res.send({
+    error: false,
+    users: users,
+  });
+};
 
 const byId = async (req, res) => {
 
@@ -50,7 +58,7 @@ const login = async (req, res) => {
         }
 
         const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
-          expiresIn: '50m'
+          expiresIn: '9999y'
         });
 
         response(res, 200, 'You have logged in successfully', { token, userId })
@@ -66,6 +74,7 @@ const login = async (req, res) => {
 }
 
 const update = async (req, res) => {
+  req.body.img = `http://localhost:5000/images/${req.file.filename}`;
   await User.findByIdAndUpdate(req.params.id, req.body);
   const user = await User.findById(req.params.id);
 
@@ -80,5 +89,6 @@ module.exports = {
   byId,
   register,
   login,
-  update
+  update,
+  getAllUsers,
 }

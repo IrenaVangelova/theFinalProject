@@ -1,15 +1,19 @@
 import { Route } from "react-router-dom";
 import AddRecipeTitle from "../../components/AddRecipeTitle";
-import "./AddRecipe.css";
+import "./EditRecipe.css";
 import avatar from "../../components/UI/images/1.jpg";
 import axios from "axios";
 import { useCurrentUser } from "../../Helpers/userContext";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-const AddRecipe = () => {
+const EditRecipe = () => {
   const [currentUser, getUser] = useCurrentUser();
   const navigate = useNavigate();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [recipeData, setRecipeData] = useState({});
+  const recipe = searchParams.get("recipe");
 
   useEffect(() => {
     getUser();
@@ -19,10 +23,24 @@ const AddRecipe = () => {
       currentUser.token === null
     ) {
       navigate("/login");
+    } else {
+      getRecipeData();
     }
   }, []);
 
-  const addRecipeHandler = (event) => {
+  const getRecipeData = () => {
+    axios.defaults.headers.common = {
+      Authorization: `Bearer ${currentUser.token}`,
+    };
+    axios
+      .get(`http://localhost:5000/recipes/${recipe}`)
+      .then((response) => {
+        setRecipeData(response.data.recipes);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const UpdateRecipeHandler = (event) => {
     event.preventDefault();
 
     let title = event.target[0].value;
@@ -34,7 +52,7 @@ const AddRecipe = () => {
     let user = currentUser.userId;
 
     axios
-      .post("http://localhost:5000/recipes/create", {
+      .post(`http://localhost:5000/recipes/${recipe}/update`, {
         title,
         category,
         preparationTime,
@@ -45,7 +63,7 @@ const AddRecipe = () => {
       })
       .then((response) => {
         console.log(response);
-        alert("Recipe added");
+        alert("Recipe updated");
         navigate("/myRecipes");
       })
       .catch((error) => console.log("error"));
@@ -55,7 +73,7 @@ const AddRecipe = () => {
     <>
       <AddRecipeTitle title={"My Recipes"} />
 
-      <form onSubmit={addRecipeHandler} className="recipe-form">
+      <form onSubmit={UpdateRecipeHandler} className="recipe-form">
         <div className="img-info">
           <h4 htmlFor="recipeImg">Recipe Image</h4>
           <img src={avatar} alt="Avatar" />
@@ -67,13 +85,21 @@ const AddRecipe = () => {
         <div className="form-info">
           <div className="form-names">
             <label htmlFor="recipeTitle">Recipe Title</label>
-            <input id="recipeTitle" placeholder="John" name="recipeTitle" />
+            <input
+              id="recipeTitle"
+              placeholder="John"
+              name="recipeTitle"
+              defaultValue={recipeData.title}
+            />
           </div>
           <div className="form-inside">
             <div className="form-names">
               <label htmlFor="category">Category</label>
-              <select id="category" name="category">
-                <option selected="selected">Select</option>
+              <select
+                id="category"
+                name="category"
+                selected={recipeData.category}
+              >
                 <option value="breakfast">Breakfast</option>
                 <option value="brunch">Brunch</option>
                 <option value="dinner">Dinner</option>
@@ -82,7 +108,12 @@ const AddRecipe = () => {
             </div>
             <div className="form-names">
               <label htmlFor="prepTime">Preparation Time</label>
-              <input id="prepTime" name="prepTime" placeholder="45" />
+              <input
+                id="prepTime"
+                name="prepTime"
+                placeholder="45"
+                defaultValue={recipeData.preparationTime}
+              />
             </div>
             <div className="form-names">
               <label htmlFor="numberOfPeople">No. People</label>
@@ -90,12 +121,18 @@ const AddRecipe = () => {
                 id="numberOfPeople"
                 name="numberOfPeople"
                 placeholder="4"
+                defaultValue={recipeData.numberOfPeople}
               />
             </div>
           </div>
           <div className="form-names-shortDesp">
             <label htmlFor="shortDesc">Short Description</label>
-            <textarea id="shortDesc" name="shortDesc" placeholder="aaa" />
+            <textarea
+              id="shortDesc"
+              name="shortDesc"
+              placeholder="aaa"
+              defaultValue={recipeData.shortDescription}
+            />
           </div>
           <button type="submit">SAVE</button>
         </div>
@@ -105,6 +142,7 @@ const AddRecipe = () => {
             id="recipe"
             name="recipe"
             placeholder="heheheeeeeeeeeeeeeeeeeeeeee"
+            defaultValue={recipeData.description}
           />
         </div>
       </form>
@@ -112,4 +150,4 @@ const AddRecipe = () => {
   );
 };
 
-export default AddRecipe;
+export default EditRecipe;

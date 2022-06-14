@@ -9,7 +9,7 @@ router.get('/category/:category?', controller.getByCategory)
 router.post('/myRecipes', controller.myRecipes)
 router.get('/:id', controller.byId)
 router.post('/create', controller.create)
-router.post('/update', controller.update)
+router.post('/:id/update', controller.update)
 router.post('/:id/remove', controller.remove)
 router.post('/like', controller.addToFavourites)
 

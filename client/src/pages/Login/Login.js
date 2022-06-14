@@ -1,8 +1,10 @@
-import SectionTitle from '../../components/sectionTitle';
-import './Login.css';
-import axios from 'axios';
+import SectionTitle from "../../components/sectionTitle";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
+import axios from "axios";
 
 const Login = () => {
+  let navigate = useNavigate();
 
   const loginHandler = (event) => {
     event.preventDefault();
@@ -10,26 +12,27 @@ const Login = () => {
     let email = event.target[0].value;
     let password = event.target[1].value;
 
-    axios.post("http://localhost:5000/users/login", { email, password })
+    axios
+      .post("http://localhost:5000/users/login", { email, password })
       .then((response) => {
         let data = {
           token: response.data.token,
           email: email,
-          userId: response.data.userId
-        }
+          userId: response.data.userId,
+        };
         localStorage.setItem("user", JSON.stringify(data));
-        // fali redirect
+        navigate("/");
       })
       .catch((error) => console.log("error"));
   };
 
   return (
     <>
-      <SectionTitle title={'Log In'} />
-      <div className='login-container'>
-        <div className='login-text-box'>
+      <SectionTitle title={"Log In"} />
+      <div className="login-container">
+        <div className="login-text-box">
           <h1>
-            Welcome to <span style={{ color: '#626262' }}>Baby's</span>
+            Welcome to <span style={{ color: "#626262" }}>Baby's</span>
           </h1>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestiae
@@ -41,22 +44,22 @@ const Login = () => {
             dolorem quae eos et? Corrupti, dicta impedit!
           </p>
         </div>
-        <form className='login-form' onSubmit={loginHandler}>
-          <label htmlFor='email'>Email</label>
+        <form className="login-form" onSubmit={loginHandler}>
+          <label htmlFor="email">Email</label>
           <input
-            type='text'
-            id='email'
-            name='email'
-            placeholder='user@domain.com'
+            type="text"
+            id="email"
+            name="email"
+            placeholder="user@domain.com"
           />
-          <label htmlFor='password'>Password</label>
+          <label htmlFor="password">Password</label>
           <input
-            type='password'
-            id='password'
-            name='password'
-            placeholder='*******'
+            type="password"
+            id="password"
+            name="password"
+            placeholder="*******"
           />
-          <button type='submit'>LOG IN</button>
+          <button type="submit">LOG IN</button>
         </form>
       </div>
     </>

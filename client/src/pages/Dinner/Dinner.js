@@ -2,6 +2,8 @@ import SectionTitle from '../../components/sectionTitle';
 import Card from '../../components/UI/Card/Card';
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useCurrentUser } from "../../Helpers/userContext";
+import { useNavigate } from "react-router-dom";
 import Modal from "../../components/UI/Modal/Modal";
 import Pagination from '../../components/UI/Pagination/Pagination';
 
@@ -11,6 +13,7 @@ const Dinner = (props) => {
   const [modalData, setModalData] = useState({});
   const [currentPage, setCurrentPage]= useState(1);
   const [recipesPerPage]= useState(9);
+  const [currentUser, getUser] = useCurrentUser();
   
 
   const indexOfLastRecipe = currentPage * recipesPerPage;
@@ -18,10 +21,13 @@ const Dinner = (props) => {
   const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
 
+  const paginate = pageNumber =>setCurrentPage(pageNumber);
 
+  const navigation = useNavigate();
 
-  
-  const paginate = pageNumber =>setCurrentPage(pageNumber)
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const get = () => {
     axios
@@ -50,10 +56,31 @@ const Dinner = (props) => {
     setModalData({});
   };
 
+  const likeHandler = (event) => {
+    if (
+      typeof currentUser === undefined ||
+      currentUser === null ||
+      currentUser.token === null
+    ) {
+      navigation("/login");
+    } else {
+      let recipeId = event.currentTarget.id;
+      let userId = currentUser.userId;
+
+      axios
+        .post("http://localhost:5000/recipes/like", { recipeId, userId })
+        .then((response) => {})
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+
   let modal = null;
 
   if (showModal === true) {
-    modal = <Modal closeModal={closeModalHandler} show={showModal} data={modalData} />;
+    modal = <Modal closeModal={closeModalHandler} show={showModal} data={modalData} like={likeHandler}/>;
   } else {
     modal = null;
   }
@@ -82,9 +109,11 @@ const Dinner = (props) => {
               category={item.category}
               shortDescription={item.shortDescription}
               preparationTime={item.preparationTime}
+              likes={item.likes}
               numberOfPeople={item.numberOfPeople}
               openModal={openModalHandler}
               recipes={currentRecipes}
+              like={likeHandler}
             />
           );
         })}

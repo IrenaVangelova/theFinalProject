@@ -1,71 +1,153 @@
-import SectionTitle from '../../components/sectionTitle';
-import './MyProfile.css'
-import avatar from '../../components/UI/images/1.jpg';
+import SectionTitle from "../../components/sectionTitle";
+import "./MyProfile.css";
+import avatar from "../../components/UI/images/1.jpg";
+import { useEffect, useState } from "react";
+import { useCurrentUser } from "../../Helpers/userContext";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const MyProfile = () => {
+  const [currentUser, getUser] = useCurrentUser();
+  const [profile, setProfile] = useState({});
+  const [hasChanges, setHasChanges] = useState(false);
+
+  const navigation = useNavigate();
+
+  const getProfileData = () => {
+    axios.defaults.headers.common = {
+      Authorization: `Bearer ${currentUser.token}`,
+    };
+    axios
+      .get(`http://localhost:5000/users/${currentUser.userId}`)
+      .then((response) => {
+        setProfile(response.data.users);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    getUser();
+    if (
+      typeof currentUser === undefined ||
+      currentUser === null ||
+      currentUser.token === null
+    ) {
+      navigation("/login");
+    } else {
+      getProfileData();
+    }
+  }, []);
+
+  const onChangeHandler = () => {
+    setHasChanges(true);
+  };
+
+  const updateProfileHandler = (event) => {
+    event.preventDefault();
+
+    let id = currentUser.userId;
+    let firstName = event.target[0].value;
+    let email = event.target[1].value;
+    let password = event.target[2].value;
+    let lastName = event.target[4].value;
+    let birthdate = event.target[5].value;
+
+    axios
+      .post(`http://localhost:5000/users/${id}/update`, {
+        id,
+        firstName,
+        email,
+        password,
+        lastName,
+        birthdate,
+      })
+      .then((response) => {
+        alert("Profile successfully updated");
+        navigation("/");
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <>
-      <SectionTitle title={'My Profile'} />
-      <form className='profile-form'>
-        <div className='profile-textbox'>
+      <SectionTitle title={"My Profile"} />
+      <form className="profile-form" onSubmit={updateProfileHandler}>
+        <div className="profile-textbox">
           <img src={avatar} alt="Avatar" />
           <form action="/upload" method="POST">
-            <input type="file" />
+            <input type="file" onChange={onChangeHandler} />
           </form>
         </div>
-        <div className='profile-info'>
-          <div className='first-three'>
-            <div className='profile-form-names'>
-              <label htmlFor='firstName'>First Name</label>
+        <div className="profile-info">
+          <div className="first-three">
+            <div className="profile-form-names">
+              <label htmlFor="firstName">First Name</label>
               <input
-                id='firstName'
-                placeholder='John'
-                name='firstName'
+                id="firstName"
+                placeholder="John"
+                name="firstName"
+                defaultValue={profile.firstName}
+                onChange={onChangeHandler}
               />
             </div>
-            <div className='profile-form-names'>
-              <label htmlFor='email'>Email</label>
+            <div className="profile-form-names">
+              <label htmlFor="email">Email</label>
               <input
-                id='email'
-                name='email'
-                placeholder='john@smith.com'
+                id="email"
+                name="email"
+                placeholder="john@smith.com"
+                defaultValue={profile.email}
+                onChange={onChangeHandler}
               />
             </div>
-            <div className='profile-form-names'>
-              <label htmlFor='password'>Password</label>
+            <div className="profile-form-names">
+              <label htmlFor="password">Password</label>
               <input
-                type='password'
-                id='password'
-                name='password'
-                placeholder='******'
+                type="password"
+                id="password"
+                name="password"
+                placeholder="******"
+                onChange={onChangeHandler}
               />
             </div>
-            <button type='submit'>SAVE</button>
+            <button type="submit" disabled={!hasChanges}>
+              SAVE
+            </button>
           </div>
-          <div className='last-three'>
-            <div className='profile-form-names'>
-              <label htmlFor='lastName'>Last Name</label>
+          <div className="last-three">
+            <div className="profile-form-names">
+              <label htmlFor="lastName">Last Name</label>
               <input
-                id='lastName'
-                name='lastName'
-                placeholder='Smith'
+                id="lastName"
+                name="lastName"
+                placeholder="Smith"
+                defaultValue={profile.lastName}
+                onChange={onChangeHandler}
               />
             </div>
-            <div className='profile-form-names'>
-              <label htmlFor='birthday'>Birthday</label>
+            <div className="profile-form-names">
+              <label htmlFor="birthday">Birthday</label>
               <input
-                type='date'
-                id='birthday'
-                name='birthday'
+                type="date"
+                id="birthday"
+                name="birthday"
+                // defaultValue={
+                //   new Date(
+                //     profile.birthdate.getFullYear(),
+                //     profile.birthdate.getMonth(),
+                //     profile.birthdate.getDay()
+                //   )
+                // }
+                onChange={() => console.log(profile)}
               />
             </div>
-            <div className='profile-form-names'>
-              <label htmlFor='passwordRepeat'>Repeat Password</label>
+            <div className="profile-form-names">
+              <label htmlFor="passwordRepeat">Repeat Password</label>
               <input
-                type='password'
-                id='passwordRepeat'
-                placeholder='******'
+                type="password"
+                id="passwordRepeat"
+                placeholder="******"
+                onChange={onChangeHandler}
               />
             </div>
           </div>
