@@ -4,11 +4,12 @@ import "./AddRecipe.css";
 import avatar from "../../components/UI/images/1.jpg";
 import axios from "axios";
 import { useCurrentUser } from "../../Helpers/userContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AddRecipe = () => {
   const [currentUser, getUser] = useCurrentUser();
+  const [image, setImage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,25 +25,19 @@ const AddRecipe = () => {
 
   const addRecipeHandler = (event) => {
     event.preventDefault();
-
-    let title = event.target[0].value;
-    let category = event.target[1].value;
-    let preparationTime = event.target[2].value;
-    let numberOfPeople = event.target[3].value;
-    let shortDescription = event.target[4].value;
-    let description = event.target[6].value;
-    let user = currentUser.userId;
+    
+    const formData = new FormData();
+    formData.append('title', event.target[1].value);
+    formData.append('category', event.target[2].value);
+    formData.append('preparationTime', event.target[3].value);
+    formData.append('numberOfPeople', event.target[4].value);
+    formData.append('shortDescription', event.target[5].value);
+    formData.append('description', event.target[7].value);
+    formData.append('user', currentUser.userId);
+    formData.append('image', image);
 
     axios
-      .post("http://localhost:5000/recipes/create", {
-        title,
-        category,
-        preparationTime,
-        numberOfPeople,
-        shortDescription,
-        description,
-        user,
-      })
+      .post("http://localhost:5000/recipes/create", formData)
       .then((response) => {
         console.log(response);
         alert("Recipe added");
@@ -58,11 +53,9 @@ const AddRecipe = () => {
       <form onSubmit={addRecipeHandler} className="recipe-form">
         <div className="img-info">
           <h4 htmlFor="recipeImg">Recipe Image</h4>
-          <img src={avatar} alt="Avatar" />
-          <form action="/upload" method="POST">
-            <input type="file" id="files" style={{ visibility: "hidden" }} />
+          <img src={image ? URL.createObjectURL(image) : null} alt="Avatar" />
+            <input id="file" type="file" accept="image/*" onChange={(e) => { setImage(e.target.files[0]); }} />
             <label for="files">Select file</label>
-          </form>
         </div>
         <div className="form-info">
           <div className="form-names">

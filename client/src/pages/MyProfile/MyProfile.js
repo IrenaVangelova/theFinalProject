@@ -10,6 +10,8 @@ const MyProfile = () => {
   const [currentUser, getUser] = useCurrentUser();
   const [profile, setProfile] = useState({});
   const [hasChanges, setHasChanges] = useState(false);
+  const [previewImage, setPreviewImage] = useState(true);
+  const [image, setImage] = useState('');
 
   const navigation = useNavigate();
 
@@ -21,6 +23,7 @@ const MyProfile = () => {
       .get(`http://localhost:5000/users/${currentUser.userId}`)
       .then((response) => {
         setProfile(response.data.users);
+        setImage(response.data.users.image);
       })
       .catch((error) => console.log(error));
   };
@@ -44,25 +47,22 @@ const MyProfile = () => {
 
   const updateProfileHandler = (event) => {
     event.preventDefault();
+    const formData = new FormData();
+
+    formData.append('id', currentUser.userId);
+    formData.append('firstName', event.target[1].value);
+    formData.append('lastName', event.target[5].value);
+    formData.append('password', event.target[3].value);
+    formData.append('email', event.target[2].value);
+    formData.append('birthdate', event.target[6].value);
+    formData.append('image', image);
 
     let id = currentUser.userId;
-    let firstName = event.target[0].value;
-    let email = event.target[1].value;
-    let password = event.target[2].value;
-    let lastName = event.target[4].value;
-    let birthdate = event.target[5].value;
 
     axios
-      .post(`http://localhost:5000/users/${id}/update`, {
-        id,
-        firstName,
-        email,
-        password,
-        lastName,
-        birthdate,
-      })
+      .post(`http://localhost:5000/users/${id}/update`, formData)
       .then((response) => {
-        alert("Profile successfully updated");
+        alert("Profile successfully updated"); 
         navigation("/");
       })
       .catch((error) => console.log(error));
@@ -73,10 +73,8 @@ const MyProfile = () => {
       <SectionTitle title={"My Profile"} />
       <form className="profile-form" onSubmit={updateProfileHandler}>
         <div className="profile-textbox">
-          <img src={avatar} alt="Avatar" />
-          <form action="/upload" method="POST">
-            <input type="file" onChange={onChangeHandler} />
-          </form>
+          <img src={image && previewImage ? 'http://localhost:5000/' + image : (previewImage==false ? URL.createObjectURL(image) : avatar)} alt="Avatar" />
+            <input id="file" type="file" accept="image/*" onChange={(e) => { setImage(e.target.files[0]); setPreviewImage(false); setHasChanges(true)}} />
         </div>
         <div className="profile-info">
           <div className="first-three">

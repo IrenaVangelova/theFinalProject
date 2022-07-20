@@ -90,7 +90,7 @@ const Brunch = (props) => {
               key={item._id}
               id={item._id}
               imgUrl={
-                "https://www.garciadepou.com/blog/wp-content/uploads/2016/08/pizza.jpg"
+                "http://localhost:5000/" + item.image
               }
               title={item.title}
               category={item.category}

@@ -34,9 +34,9 @@ const recipeSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  img: {
-    data: Buffer,
-    contentType: String
+  image: {
+    type: String,
+    required: false
   },
   user: {
     type: mongoose.Types.ObjectId,

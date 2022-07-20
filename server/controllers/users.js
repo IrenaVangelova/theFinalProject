@@ -3,6 +3,7 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const response = require('../lib/response_handler');
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
 const getAllUsers = async (req, res) => {
   const users = await User.find().populate("likedRecipes");
@@ -74,9 +75,26 @@ const login = async (req, res) => {
 }
 
 const update = async (req, res) => {
-  req.body.img = `http://localhost:5000/images/${req.file.filename}`;
-  await User.findByIdAndUpdate(req.params.id, req.body);
   const user = await User.findById(req.params.id);
+
+  if(req.file) {
+    fs.unlink('public/' + user.image, (err) => {
+      if (err) console.log(err);
+    })
+    req.body.image = `images/${req.file.filename}`;
+  }
+  else {
+    req.body.image = user.image;
+  }
+
+  if (req.body.password !== "") {
+    req.body.password = bcrypt.hashSync(req.body.password);
+  }
+  else {
+    req.body.password = user.password;
+  }
+
+  await User.findByIdAndUpdate(req.body.id, req.body);
 
   res.send({
     error: false,

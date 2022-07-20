@@ -29,9 +29,9 @@ const userSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "recipe"
   }],
-  img: {
-    data: Buffer,
-    contentType: String
+  image: {
+    type: String,
+    required: false
   }
 }, { timestamps: true });
 

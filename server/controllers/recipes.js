@@ -23,6 +23,7 @@ const byId = async (req, res) => {
 };
 
 const create = async (req, res) => {
+  req.body.image = `images/${req.file.filename}`
   const recipe = await Recipe.create({
     ...req.body,
   });
@@ -143,6 +144,8 @@ const getByCategory = async (req, res) => {
   let category = req.params.category;
 
   let recipes = [];
+
+  // let totalPages = await (await Recipe.find()).length;
 
   console.log(category);
   if (typeof category === "undefined") {

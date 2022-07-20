@@ -42,7 +42,8 @@ const Modal = (props) => {
             <div className="modal-left">
               <img
                 className="modal-img"
-                src="https://www.garciadepou.com/blog/wp-content/uploads/2016/08/pizza.jpg"
+                // src="https://www.garciadepou.com/blog/wp-content/uploads/2016/08/pizza.jpg"
+                src={"http://localhost:5000/" + item.image}
                 alt="image"
               />
               <div className="category-info">

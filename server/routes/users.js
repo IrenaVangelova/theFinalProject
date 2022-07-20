@@ -3,6 +3,7 @@ var router = express.Router();
 const controller = require("../controllers/users");
 const { expressjwt: jwt } = require("express-jwt");
 const response = require("../lib/response_handler");
+const upload = require("../lib/multer");
 
 require("dotenv").config();
 
@@ -39,6 +40,6 @@ router.get("/all", controller.getAllUsers);
 router.post("/register", controller.register);
 router.post("/login", controller.login);
 router.get("/:id", controller.byId);
-router.post("/:id/update", controller.update);
+router.post("/:id/update", upload.single('image'), controller.update);
 
 module.exports = router;
