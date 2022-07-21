@@ -6,7 +6,7 @@ const upload = require("../lib/multer");
 router.get('/', controller.all)
 router.get('/popular', controller.getMostPopular)
 router.get('/latest', controller.getLatest)
-router.get('/category/:category?', controller.getByCategory)
+router.get('/category/:category?/:page?', controller.getByCategory)
 router.post('/myRecipes', controller.myRecipes)
 router.get('/:id', controller.byId)
 router.post('/create', upload.single('image'), controller.create)

@@ -60,7 +60,6 @@ const Card = (props) => {
           <div className="card-stars">
             <FontAwesomeIcon
               id={id}
-              // onClick={like}
               onClick={like}
               icon={faStar}
               color="#B8B8B8"

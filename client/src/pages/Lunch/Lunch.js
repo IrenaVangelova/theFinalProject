@@ -6,14 +6,13 @@ import { useCurrentUser } from "../../Helpers/userContext";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../components/UI/Modal/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faChevronLeft, faL } from "@fortawesome/free-solid-svg-icons";
 
 const Lunch = (props) => {
   const [currentUser, getUser] = useCurrentUser();
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({});
   const [recipes, setRecipes] = useState([]);
-  const [currentPage, setCurrentPage]= useState(1);
 
   const navigation = useNavigate();
 
@@ -21,12 +20,14 @@ const Lunch = (props) => {
     getUser();
   }, []);
 
-  const get = () => {
+  const get = (page) => {
+    if (page === null || page === undefined) page = 0;
     axios
-      .get("http://localhost:5000/recipes/category/lunch")
+      .get("http://localhost:5000/recipes/category/lunch/" + page)
       .then((res) => {
+        console.log(res.data);
         setRecipes(res.data.recipes);
-        console.log(res.data.recipes);
+        setTotalPages(res.data.totalPages);
       })
       .catch((err) => {
         console.error(err);
@@ -36,6 +37,9 @@ const Lunch = (props) => {
   useEffect(() => {
     get();
   }, []);
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(recipes.length);
 
   const openModalHandler = (event) => {
     setModalData(event.currentTarget.id);
@@ -47,12 +51,24 @@ const Lunch = (props) => {
     setModalData({});
   };
 
+  const prevPageHandler = () => {
+    if (currentPage - 1 < 0) return;
+    setCurrentPage(currentPage - 1);
+    get(currentPage);
+  };
+  const nextPageHandler = () => {
+    if (currentPage + 1 > totalPages - 1) return;
+    setCurrentPage(currentPage + 1);
+    get(currentPage);
+  };
+
+  useEffect(() => {
+    get(currentPage);
+    console.log(currentPage);
+  }, [currentPage]);
+
   const likeHandler = (event) => {
-    if (
-      typeof currentUser === undefined ||
-      currentUser === null ||
-      currentUser.token === null
-    ) {
+    if (typeof currentUser === undefined || currentUser === null || currentUser.token === null) {
       navigation("/login");
     } else {
       let recipeId = event.currentTarget.id;
@@ -84,7 +100,6 @@ const Lunch = (props) => {
           justifyContent: "flex-start",
           marginTop: "1rem",
           flexWrap: "wrap",
-
         }}
       >
         {recipes.map((item) => {
@@ -92,9 +107,7 @@ const Lunch = (props) => {
             <Card
               key={item._id}
               id={item._id}
-              imgUrl={
-                "http://localhost:5000/" + item.image
-              }
+              imgUrl={"http://localhost:5000/" + item.image}
               title={item.title}
               category={item.category}
               shortDescription={item.shortDescription}
@@ -104,33 +117,34 @@ const Lunch = (props) => {
               openModal={openModalHandler}
               like={likeHandler}
             />
-            
           );
         })}
       </div>
-      {modal}  
-      <div className="pagination-arrows" style={{ marginTop: "3rem"}}>
-        <FontAwesomeIcon
-                  icon={faChevronLeft}
-                  color="gray"
-                  style={{
-                    width: "16.6px",
-                    height: "30.1px",
-                    cursor: "pointer",
-                  }}
-                  // onClick={setCurrentPage(currentPage - 1)}
-                />
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <FontAwesomeIcon
-                  icon={faChevronRight}
-                  color="gray"
-                  style={{
-                    width: "16.6px",
-                    height: "30.1px",
-                    cursor: "pointer",
-                  }}
-                  // onClick={setCurrentPage(currentPage + 1)}
-                />
+      {modal}
+      <div className="pagination-arrows" style={{ marginTop: "3rem" }}>
+        <button onClick={prevPageHandler}>
+          <FontAwesomeIcon
+            icon={faChevronLeft}
+            color="gray"
+            style={{
+              width: "16.6px",
+              height: "30.1px",
+              cursor: "pointer",
+            }}
+          />
+        </button>
+        <span>&nbsp;&nbsp;{currentPage + 1}&nbsp;&nbsp;</span>
+        <button onClick={nextPageHandler}>
+          <FontAwesomeIcon
+            icon={faChevronRight}
+            color="gray"
+            style={{
+              width: "16.6px",
+              height: "30.1px",
+              cursor: "pointer",
+            }}
+          />
+        </button>
       </div>
     </div>
   );

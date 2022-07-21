@@ -130,13 +130,6 @@ const MyProfile = () => {
                 type="date"
                 id="birthday"
                 name="birthday"
-                // defaultValue={
-                //   new Date(
-                //     profile.birthdate.getFullYear(),
-                //     profile.birthdate.getMonth(),
-                //     profile.birthdate.getDay()
-                //   )
-                // }
                 onChange={() => console.log(profile)}
               />
             </div>

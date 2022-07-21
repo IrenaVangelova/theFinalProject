@@ -8,7 +8,7 @@ const all = async (req, res) => {
   const recipes = await Recipe.find().populate("user");
   res.send({
     error: false,
-    message: `All recipes from the database`,
+    message: "All recipes from the database",
     recipes: recipes,
   });
 };
@@ -24,7 +24,7 @@ const byId = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  req.body.image = `images/${req.file.filename}`
+  req.body.image = `images/${req.file.filename}`;
   const recipe = await Recipe.create({
     ...req.body,
   });
@@ -52,7 +52,6 @@ const update = async (req, res) => {
   else {
     req.body.image = recipe.image;
   }
-
 
   await Recipe.findByIdAndUpdate(req.params.id, req.body);
 
@@ -88,12 +87,7 @@ const addToFavourites = async (req, res) => {
     let update = { $inc: { likes: -1 } };
     let options = { new: true };
 
-    Recipe.findOneAndUpdate(
-      { _id: recipeId },
-      update,
-      options,
-      function (err, response) {}
-    );
+    Recipe.findOneAndUpdate({ _id: recipeId }, update, options, function (err, response) {});
 
     await User.findOneAndUpdate(
       { _id: userId },
@@ -110,14 +104,9 @@ const addToFavourites = async (req, res) => {
     let update = { $inc: { likes: 1 } };
     let options = { new: true };
 
-    Recipe.findOneAndUpdate(
-      { _id: recipeId },
-      update,
-      options,
-      function (err, response) {
-        console.log(response);
-      }
-    );
+    Recipe.findOneAndUpdate({ _id: recipeId }, update, options, function (err, response) {
+      console.log(response);
+    });
 
     await User.findOneAndUpdate(
       { _id: userId },
@@ -138,7 +127,7 @@ const getMostPopular = async (req, res) => {
 
   res.send({
     error: false,
-    message: `All recipes from the database`,
+    message: "All recipes from the database",
     recipes: recipes.slice(0, 6),
   });
 };
@@ -148,28 +137,42 @@ const getLatest = async (req, res) => {
 
   res.send({
     error: false,
-    message: `All recipes from the database`,
+    message: "All recipes from the database",
     recipes: recipes.slice(0, 3),
   });
 };
 
 const getByCategory = async (req, res) => {
   let category = req.params.category;
+  let page = req.params.page;
+
+  if (page === null || typeof page === undefined) {
+    page = 1;
+  }
+
+  let perPage = 9;
+  let length = 1;
 
   let recipes = [];
 
-  console.log(category);
   if (typeof category === "undefined") {
     recipes = await Recipe.find();
+    length = recipes.length;
   } else {
-    recipes = await Recipe.find({ category: category })      
+    length = await (await Recipe.find({ category: category })).length;
+    recipes = await Recipe.find({ category: category })
+      .skip(perPage * page)
+      .limit(perPage);
   }
 
-  // let totalPages = Math.ceil(recipes.length / perPage);
+  let totalPages = Math.ceil(length / perPage);
 
   res.send({
     error: false,
     recipes: recipes,
+    totalPages: totalPages,
+    length: length,
+    page: page,
   });
 };
 

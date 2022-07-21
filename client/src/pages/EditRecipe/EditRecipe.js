@@ -87,7 +87,7 @@ const EditRecipe = () => {
             <label htmlFor="recipeTitle">Recipe Title</label>
             <input
               id="recipeTitle"
-              placeholder="John"
+              placeholder="Title"
               name="recipeTitle"
               defaultValue={recipeData.title}
               onChange={onChangeHandler}
@@ -113,7 +113,7 @@ const EditRecipe = () => {
               <input
                 id="prepTime"
                 name="prepTime"
-                placeholder="45"
+                placeholder="0"
                 defaultValue={recipeData.preparationTime}
                 onChange={onChangeHandler}
               />
@@ -123,7 +123,7 @@ const EditRecipe = () => {
               <input
                 id="numberOfPeople"
                 name="numberOfPeople"
-                placeholder="4"
+                placeholder="0"
                 defaultValue={recipeData.numberOfPeople}
                 onChange={onChangeHandler}
               />
@@ -134,7 +134,7 @@ const EditRecipe = () => {
             <textarea
               id="shortDesc"
               name="shortDesc"
-              placeholder="aaa"
+              placeholder="Short description..."
               defaultValue={recipeData.shortDescription}
               onChange={onChangeHandler}
             />
@@ -146,7 +146,7 @@ const EditRecipe = () => {
           <textarea
             id="recipe"
             name="recipe"
-            placeholder="heheheeeeeeeeeeeeeeeeeeeeee"
+            placeholder="Description..."
             defaultValue={recipeData.description}
             onChange={onChangeHandler}
           />

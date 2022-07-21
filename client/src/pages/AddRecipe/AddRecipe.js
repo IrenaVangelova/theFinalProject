@@ -1,7 +1,5 @@
-import { Route } from "react-router-dom";
 import AddRecipeTitle from "../../components/AddRecipeTitle";
 import "./AddRecipe.css";
-import avatar from "../../components/UI/images/avatar.jpg";
 import recipeImg from "../../components/UI/images/recipe.jpg";
 import axios from "axios";
 import { useCurrentUser } from "../../Helpers/userContext";
@@ -61,7 +59,7 @@ const AddRecipe = () => {
         <div className="form-info">
           <div className="form-names">
             <label htmlFor="recipeTitle">Recipe Title</label>
-            <input id="recipeTitle" placeholder="John" name="recipeTitle" />
+            <input id="recipeTitle" placeholder="Title" name="recipeTitle" />
           </div>
           <div className="form-inside">
             <div className="form-names">
@@ -76,20 +74,20 @@ const AddRecipe = () => {
             </div>
             <div className="form-names">
               <label htmlFor="prepTime">Preparation Time</label>
-              <input id="prepTime" name="prepTime" placeholder="45" />
+              <input id="prepTime" name="prepTime" placeholder="0" />
             </div>
             <div className="form-names">
               <label htmlFor="numberOfPeople">No. People</label>
               <input
                 id="numberOfPeople"
                 name="numberOfPeople"
-                placeholder="4"
+                placeholder="0"
               />
             </div>
           </div>
           <div className="form-names-shortDesp">
             <label htmlFor="shortDesc">Short Description</label>
-            <textarea id="shortDesc" name="shortDesc" placeholder="aaa" />
+            <textarea id="shortDesc" name="shortDesc" placeholder="Short description..." />
           </div>
           <button type="submit">SAVE</button>
         </div>
@@ -98,7 +96,7 @@ const AddRecipe = () => {
           <textarea
             id="recipe"
             name="recipe"
-            placeholder="heheheeeeeeeeeeeeeeeeeeeeee"
+            placeholder="Description..."
           />
         </div>
       </form>

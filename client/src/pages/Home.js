@@ -5,11 +5,9 @@ import Modal from "../components/UI/Modal/Modal";
 import axios from "axios";
 import { useCurrentUser } from "../Helpers/userContext";
 import { useNavigate } from "react-router-dom";
-// import Pagination from "../components/UI/Pagination/Pagination";
 
 const Home = () => {
   const [currentUser, getUser] = useCurrentUser();
-
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({});
   const [latest, setLatest] = useState([]);

@@ -13,7 +13,6 @@ const Brunch = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({});
   const [currentUser, getUser] = useCurrentUser();
-  const [currentPage, setCurrentPage]= useState(1);
 
   const navigation = useNavigate();
 
@@ -21,12 +20,14 @@ const Brunch = (props) => {
     getUser();
   }, []);
 
-  const get = () => {
+  const get = (page) => {
+    if (page === null || page === undefined) page = 0;
     axios
-      .get("http://localhost:5000/recipes/category/brunch")
+      .get("http://localhost:5000/recipes/category/brunch/" + page)
       .then((res) => {
         setRecipes(res.data.recipes);
         console.log(res.data.recipes);
+        setTotalPages(res.data.totalPages);
       })
       .catch((err) => {
         console.error(err);
@@ -37,6 +38,9 @@ const Brunch = (props) => {
     get();
   }, []);
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(recipes.length);
+
   const openModalHandler = (event) => {
     setModalData(event.currentTarget.id);
     setShowModal(true);
@@ -46,6 +50,22 @@ const Brunch = (props) => {
     setShowModal(false);
     setModalData({});
   };
+
+  const prevPageHandler = () => {
+    if (currentPage - 1 < 0) return;
+    setCurrentPage(currentPage - 1);
+    get(currentPage);
+  };
+  const nextPageHandler = () => {
+    if (currentPage + 1 > totalPages - 1) return;
+    setCurrentPage(currentPage + 1);
+    get(currentPage);
+  };
+
+  useEffect(() => {
+    get(currentPage);
+    console.log(currentPage);
+  }, [currentPage]);
 
   const likeHandler = (event) => {
     if (
@@ -108,29 +128,31 @@ const Brunch = (props) => {
         })}
       </div>
       {modal}
-      <div className="pagination-arrows" style={{ marginTop: "3rem"}}>
-        <FontAwesomeIcon
-                  icon={faChevronLeft}
-                  color="gray"
-                  style={{
-                    width: "16.6px",
-                    height: "30.1px",
-                    cursor: "pointer",
-                  }}
-                  // onClick={setCurrentPage(currentPage - 1)}
-                />
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <FontAwesomeIcon
-                  icon={faChevronRight}
-                  color="gray"
-                  style={{
-                    width: "16.6px",
-                    height: "30.1px",
-                    cursor: "pointer",
-                  }}
-                  // onClick={setCurrentPage(currentPage + 1)}
-                />
-      </div>
+      <div className="pagination-arrows" style={{ marginTop: "3rem" }}>
+        <button onClick={prevPageHandler}>
+          <FontAwesomeIcon
+            icon={faChevronLeft}
+            color="gray"
+            style={{
+              width: "16.6px",
+              height: "30.1px",
+              cursor: "pointer",
+            }}
+          />
+        </button>
+        <span>&nbsp;&nbsp;{currentPage + 1}&nbsp;&nbsp;</span>
+        <button onClick={nextPageHandler}>
+          <FontAwesomeIcon
+            icon={faChevronRight}
+            color="gray"
+            style={{
+              width: "16.6px",
+              height: "30.1px",
+              cursor: "pointer",
+            }}
+          />
+        </button>
+      </div>  
     </div>
   );
 }
