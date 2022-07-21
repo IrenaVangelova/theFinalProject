@@ -14,8 +14,6 @@ const Home = () => {
   const [modalData, setModalData] = useState({});
   const [latest, setLatest] = useState([]);
   const [popular, setPopular] = useState([]);
-  //   const [currentPage, setCurrentPage]= useState(1);
-  //   const [recipesPerPage]= useState(3);
 
   const navigation = useNavigate();
 
@@ -73,7 +71,7 @@ const Home = () => {
 
       axios
         .post("http://localhost:5000/recipes/like", { recipeId, userId })
-        .then((response) => {})
+        .then((response) => { })
         .catch((error) => {
           console.log(error);
         });
@@ -95,10 +93,6 @@ const Home = () => {
     modal = null;
   }
 
-  //   const indexOfLastRecipe = currentPage * recipesPerPage;
-  //   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  //   const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
-
   return (
     <>
       <SectionTitle title={"Fresh & New"} />
@@ -116,7 +110,7 @@ const Home = () => {
               key={item._id}
               id={item._id}
               imgUrl={
-                "https://www.garciadepou.com/blog/wp-content/uploads/2016/08/pizza.jpg"
+                "http://localhost:5000/" + item.image
               }
               title={item.title}
               category={item.category}
@@ -130,14 +124,6 @@ const Home = () => {
           );
         })}
       </div>
-      {/* <div>
-        <ul>
-          {renderTodos}
-        </ul>
-        <ul id="page-numbers">
-          {renderPageNumbers}
-        </ul>
-      </div> */}
       <SectionTitle title={"Most Popular Recipes"} />
       <div
         className="cards-fresh-and-new"
@@ -154,7 +140,7 @@ const Home = () => {
               key={item._id}
               id={item._id}
               imgUrl={
-                "https://www.garciadepou.com/blog/wp-content/uploads/2016/08/pizza.jpg"
+                "http://localhost:5000/" + item.image
               }
               title={item.title}
               category={item.category}

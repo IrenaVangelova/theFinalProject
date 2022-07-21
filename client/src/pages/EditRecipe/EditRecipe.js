@@ -1,7 +1,6 @@
-import { Route } from "react-router-dom";
 import AddRecipeTitle from "../../components/AddRecipeTitle";
 import "./EditRecipe.css";
-import avatar from "../../components/UI/images/1.jpg";
+import recipeImg from "../../components/UI/images/recipe.jpg";
 import axios from "axios";
 import { useCurrentUser } from "../../Helpers/userContext";
 import { useEffect, useState } from "react";
@@ -9,11 +8,27 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 const EditRecipe = () => {
   const [currentUser, getUser] = useCurrentUser();
-  const navigate = useNavigate();
-
   const [searchParams, setSearchParams] = useSearchParams();
   const [recipeData, setRecipeData] = useState({});
+  const [hasChanges, setHasChanges] = useState(false);
   const recipe = searchParams.get("recipe");
+  const [previewImage, setPreviewImage] = useState(true);
+  const [image, setImage] = useState('');
+  const navigate = useNavigate();
+
+  const getRecipeData = () => {
+    axios.defaults.headers.common = {
+      Authorization: `Bearer ${currentUser.token}`,
+    };
+    axios
+      .get(`http://localhost:5000/recipes/${recipe}`)
+      .then((response) => {
+        console.log(response.data.recipes);
+        setRecipeData(response.data.recipes);
+        setImage(response.data.recipes.image);
+      })
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
     getUser();
@@ -28,41 +43,28 @@ const EditRecipe = () => {
     }
   }, []);
 
-  const getRecipeData = () => {
-    axios.defaults.headers.common = {
-      Authorization: `Bearer ${currentUser.token}`,
-    };
-    axios
-      .get(`http://localhost:5000/recipes/${recipe}`)
-      .then((response) => {
-        setRecipeData(response.data.recipes);
-      })
-      .catch((error) => console.log(error));
+  const onChangeHandler = () => {
+    setHasChanges(true);
   };
 
   const UpdateRecipeHandler = (event) => {
     event.preventDefault();
+    const formData = new FormData();
 
-    let title = event.target[0].value;
-    let category = event.target[1].value;
-    let preparationTime = event.target[2].value;
-    let numberOfPeople = event.target[3].value;
-    let shortDescription = event.target[4].value;
-    let description = event.target[6].value;
-    let user = currentUser.userId;
+    formData.append('id', currentUser.userId);
+    formData.append('title', event.target[1].value);
+    formData.append('category', event.target[2].value);
+    formData.append('preparationTime', event.target[3].value);
+    formData.append('numberOfPeople', event.target[4].value);
+    formData.append('shortDescription', event.target[5].value);
+    formData.append('description', event.target[7].value);
+    formData.append('image', image);
+
+    let id = currentUser.userId;
 
     axios
-      .post(`http://localhost:5000/recipes/${recipe}/update`, {
-        title,
-        category,
-        preparationTime,
-        numberOfPeople,
-        shortDescription,
-        description,
-        user,
-      })
+      .post(`http://localhost:5000/recipes/${recipe}/update`, formData)
       .then((response) => {
-        console.log(response);
         alert("Recipe updated");
         navigate("/myRecipes");
       })
@@ -76,11 +78,9 @@ const EditRecipe = () => {
       <form onSubmit={UpdateRecipeHandler} className="recipe-form">
         <div className="img-info">
           <h4 htmlFor="recipeImg">Recipe Image</h4>
-          <img src={avatar} alt="Avatar" />
-          <form action="/upload" method="POST">
-            <input type="file" id="files" style={{ visibility: "hidden" }} />
-            <label for="files">Select file</label>
-          </form>
+          <img src={image && previewImage ? 'http://localhost:5000/' + image : (previewImage==false ? URL.createObjectURL(image) : recipeImg)} alt="recipeImg" />
+            <input id="file" type="file" style = {{visibility: "hidden"}} accept="image/*" onChange={(e) => { setImage(e.target.files[0]); setPreviewImage(false); setHasChanges(true)}} />
+            <label for="file">UPLOAD IMAGE</label>
         </div>
         <div className="form-info">
           <div className="form-names">
@@ -90,6 +90,7 @@ const EditRecipe = () => {
               placeholder="John"
               name="recipeTitle"
               defaultValue={recipeData.title}
+              onChange={onChangeHandler}
             />
           </div>
           <div className="form-inside">
@@ -99,6 +100,7 @@ const EditRecipe = () => {
                 id="category"
                 name="category"
                 selected={recipeData.category}
+                onChange={onChangeHandler}
               >
                 <option value="breakfast">Breakfast</option>
                 <option value="brunch">Brunch</option>
@@ -113,6 +115,7 @@ const EditRecipe = () => {
                 name="prepTime"
                 placeholder="45"
                 defaultValue={recipeData.preparationTime}
+                onChange={onChangeHandler}
               />
             </div>
             <div className="form-names">
@@ -122,6 +125,7 @@ const EditRecipe = () => {
                 name="numberOfPeople"
                 placeholder="4"
                 defaultValue={recipeData.numberOfPeople}
+                onChange={onChangeHandler}
               />
             </div>
           </div>
@@ -132,9 +136,10 @@ const EditRecipe = () => {
               name="shortDesc"
               placeholder="aaa"
               defaultValue={recipeData.shortDescription}
+              onChange={onChangeHandler}
             />
           </div>
-          <button type="submit">SAVE</button>
+          <button type="submit" disabled={!hasChanges}>SAVE</button>
         </div>
         <div className="recipe-info">
           <h4 htmlFor="recipe">Recipe</h4>
@@ -143,6 +148,7 @@ const EditRecipe = () => {
             name="recipe"
             placeholder="heheheeeeeeeeeeeeeeeeeeeeee"
             defaultValue={recipeData.description}
+            onChange={onChangeHandler}
           />
         </div>
       </form>

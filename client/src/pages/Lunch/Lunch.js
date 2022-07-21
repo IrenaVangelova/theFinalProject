@@ -5,12 +5,15 @@ import axios from "axios";
 import { useCurrentUser } from "../../Helpers/userContext";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../components/UI/Modal/Modal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 const Lunch = (props) => {
   const [currentUser, getUser] = useCurrentUser();
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({});
   const [recipes, setRecipes] = useState([]);
+  const [currentPage, setCurrentPage]= useState(1);
 
   const navigation = useNavigate();
 
@@ -90,7 +93,7 @@ const Lunch = (props) => {
               key={item._id}
               id={item._id}
               imgUrl={
-                "https://www.garciadepou.com/blog/wp-content/uploads/2016/08/pizza.jpg"
+                "http://localhost:5000/" + item.image
               }
               title={item.title}
               category={item.category}
@@ -101,10 +104,34 @@ const Lunch = (props) => {
               openModal={openModalHandler}
               like={likeHandler}
             />
+            
           );
         })}
       </div>
-      {modal}
+      {modal}  
+      <div className="pagination-arrows" style={{ marginTop: "3rem"}}>
+        <FontAwesomeIcon
+                  icon={faChevronLeft}
+                  color="gray"
+                  style={{
+                    width: "16.6px",
+                    height: "30.1px",
+                    cursor: "pointer",
+                  }}
+                  // onClick={setCurrentPage(currentPage - 1)}
+                />
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <FontAwesomeIcon
+                  icon={faChevronRight}
+                  color="gray"
+                  style={{
+                    width: "16.6px",
+                    height: "30.1px",
+                    cursor: "pointer",
+                  }}
+                  // onClick={setCurrentPage(currentPage + 1)}
+                />
+      </div>
     </div>
   );
 };

@@ -5,12 +5,15 @@ import axios from "axios";
 import Modal from "../../components/UI/Modal/Modal";
 import { useCurrentUser } from "../../Helpers/userContext";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 const Brunch = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({});
   const [currentUser, getUser] = useCurrentUser();
+  const [currentPage, setCurrentPage]= useState(1);
 
   const navigation = useNavigate();
 
@@ -105,6 +108,29 @@ const Brunch = (props) => {
         })}
       </div>
       {modal}
+      <div className="pagination-arrows" style={{ marginTop: "3rem"}}>
+        <FontAwesomeIcon
+                  icon={faChevronLeft}
+                  color="gray"
+                  style={{
+                    width: "16.6px",
+                    height: "30.1px",
+                    cursor: "pointer",
+                  }}
+                  // onClick={setCurrentPage(currentPage - 1)}
+                />
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <FontAwesomeIcon
+                  icon={faChevronRight}
+                  color="gray"
+                  style={{
+                    width: "16.6px",
+                    height: "30.1px",
+                    cursor: "pointer",
+                  }}
+                  // onClick={setCurrentPage(currentPage + 1)}
+                />
+      </div>
     </div>
   );
 }

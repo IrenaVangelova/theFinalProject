@@ -5,6 +5,8 @@ import axios from "axios";
 import Modal from "../../components/UI/Modal/Modal";
 import { useCurrentUser } from "../../Helpers/userContext";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 const Breakfast = (props) => {
 
@@ -12,6 +14,7 @@ const Breakfast = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState({});
   const [currentUser, getUser] = useCurrentUser();
+  const [currentPage, setCurrentPage]= useState(1);
 
   const navigation = useNavigate();
 
@@ -92,7 +95,7 @@ const Breakfast = (props) => {
               key={item._id}
               id={item._id}
               imgUrl={
-                "https://www.garciadepou.com/blog/wp-content/uploads/2016/08/pizza.jpg"
+                "http://localhost:5000/" + item.image
               }
               title={item.title}
               category={item.category}
@@ -107,6 +110,29 @@ const Breakfast = (props) => {
         })}
       </div>
       {modal}
+      <div className="pagination-arrows" style={{ marginTop: "3rem"}}>
+        <FontAwesomeIcon
+                  icon={faChevronLeft}
+                  color="gray"
+                  style={{
+                    width: "16.6px",
+                    height: "30.1px",
+                    cursor: "pointer",
+                  }}
+                  // onClick={setCurrentPage(currentPage - 1)}
+                />
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <FontAwesomeIcon
+                  icon={faChevronRight}
+                  color="gray"
+                  style={{
+                    width: "16.6px",
+                    height: "30.1px",
+                    cursor: "pointer",
+                  }}
+                  // onClick={setCurrentPage(currentPage + 1)}
+                />
+      </div>
     </div>
   );
 }

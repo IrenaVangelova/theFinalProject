@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { useCurrentUser } from "../../Helpers/userContext";
 import { useNavigate } from "react-router-dom";
-
+import moment from 'moment';
 import axios from "axios";
 
 const MyRecipes = () => {
@@ -88,7 +88,7 @@ const MyRecipes = () => {
               >
                 <div className="my-recipes-category">{item.category}</div>
               </td>
-              <td>{item.createdOn}</td>
+              <td><div style={{marginRight: "130px"}}>{moment(item.createdOn).format('DD.MM.YYYY')}</div></td>
               <td>
                 <FontAwesomeIcon
                   id={item._id}

@@ -2,6 +2,7 @@ const Recipe = require("../models/recipe");
 const response = require("../lib/response_handler");
 const User = require("../models/user");
 const user = require("../models/user");
+const fs = require('fs');
 
 const all = async (req, res) => {
   const recipes = await Recipe.find().populate("user");
@@ -40,12 +41,24 @@ const create = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  await Recipe.findByIdAndUpdate(req.params.id, req.body);
   const recipe = await Recipe.findById(req.params.id);
+
+  if(req.file) {
+    fs.unlink('public/' + recipe.image, (err) => {
+      if (err) console.log(err);
+    })
+    req.body.image = `images/${req.file.filename}`;
+  }
+  else {
+    req.body.image = recipe.image;
+  }
+
+
+  await Recipe.findByIdAndUpdate(req.params.id, req.body);
 
   res.send({
     error: false,
-    message: "Recipe has been updated",
+    message: `Recipe with id #${recipe._id} has been updated`,
     recipe: recipe,
   });
 };
@@ -145,14 +158,14 @@ const getByCategory = async (req, res) => {
 
   let recipes = [];
 
-  // let totalPages = await (await Recipe.find()).length;
-
   console.log(category);
   if (typeof category === "undefined") {
     recipes = await Recipe.find();
   } else {
-    recipes = await Recipe.find({ category: category });
+    recipes = await Recipe.find({ category: category })      
   }
+
+  // let totalPages = Math.ceil(recipes.length / perPage);
 
   res.send({
     error: false,

@@ -1,7 +1,8 @@
 import { Route } from "react-router-dom";
 import AddRecipeTitle from "../../components/AddRecipeTitle";
 import "./AddRecipe.css";
-import avatar from "../../components/UI/images/1.jpg";
+import avatar from "../../components/UI/images/avatar.jpg";
+import recipeImg from "../../components/UI/images/recipe.jpg";
 import axios from "axios";
 import { useCurrentUser } from "../../Helpers/userContext";
 import { useEffect, useState } from "react";
@@ -53,9 +54,9 @@ const AddRecipe = () => {
       <form onSubmit={addRecipeHandler} className="recipe-form">
         <div className="img-info">
           <h4 htmlFor="recipeImg">Recipe Image</h4>
-          <img src={image ? URL.createObjectURL(image) : null} alt="Avatar" />
-            <input id="file" type="file" accept="image/*" onChange={(e) => { setImage(e.target.files[0]); }} />
-            <label for="files">Select file</label>
+          <img src={image ? URL.createObjectURL(image) : recipeImg} alt="Avatar" />
+            <input id="file" type="file" style = {{visibility: "hidden"}} accept="image/*" onChange={(e) => { setImage(e.target.files[0]); }} />
+            <label for="file">UPLOAD IMAGE</label>
         </div>
         <div className="form-info">
           <div className="form-names">

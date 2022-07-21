@@ -1,6 +1,6 @@
 import SectionTitle from "../../components/sectionTitle";
 import "./MyProfile.css";
-import avatar from "../../components/UI/images/1.jpg";
+import avatar from "../../components/UI/images/avatar.jpg";
 import { useEffect, useState } from "react";
 import { useCurrentUser } from "../../Helpers/userContext";
 import { useNavigate } from "react-router-dom";
@@ -74,7 +74,8 @@ const MyProfile = () => {
       <form className="profile-form" onSubmit={updateProfileHandler}>
         <div className="profile-textbox">
           <img src={image && previewImage ? 'http://localhost:5000/' + image : (previewImage==false ? URL.createObjectURL(image) : avatar)} alt="Avatar" />
-            <input id="file" type="file" accept="image/*" onChange={(e) => { setImage(e.target.files[0]); setPreviewImage(false); setHasChanges(true)}} />
+            <input id="file" type="file" style = {{visibility: "hidden"}} accept="image/*" onChange={(e) => { setImage(e.target.files[0]); setPreviewImage(false); setHasChanges(true)}} />
+            <label for="file">CHANGE AVATAR</label>
         </div>
         <div className="profile-info">
           <div className="first-three">

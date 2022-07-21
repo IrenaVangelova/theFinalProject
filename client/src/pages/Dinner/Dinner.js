@@ -6,6 +6,8 @@ import { useCurrentUser } from "../../Helpers/userContext";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../components/UI/Modal/Modal";
 import Pagination from '../../components/UI/Pagination/Pagination';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 const Dinner = (props) => {
   const [recipes, setRecipes] = useState([]);
@@ -103,7 +105,7 @@ const Dinner = (props) => {
               key={item._id}
               id={item._id}
               imgUrl={
-                "https://www.garciadepou.com/blog/wp-content/uploads/2016/08/pizza.jpg"
+                "http://localhost:5000/" + item.image
               }
               title={item.title}
               category={item.category}
@@ -120,9 +122,32 @@ const Dinner = (props) => {
       </div>
       {modal}
 
-      <div className='homecontainer'>
+      {/* <div className='homecontainer'>
           <Pagination recipesPerPage={recipesPerPage} totalRecipes={recipes.length} paginate={paginate}/>
-        </div>
+        </div> */}
+              <div className="pagination-arrows" style={{ marginTop: "3rem"}}>
+        <FontAwesomeIcon
+                  icon={faChevronLeft}
+                  color="gray"
+                  style={{
+                    width: "16.6px",
+                    height: "30.1px",
+                    cursor: "pointer",
+                  }}
+                  // onClick={setCurrentPage(currentPage - 1)}
+                />
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <FontAwesomeIcon
+                  icon={faChevronRight}
+                  color="gray"
+                  style={{
+                    width: "16.6px",
+                    height: "30.1px",
+                    cursor: "pointer",
+                  }}
+                  // onClick={setCurrentPage(currentPage + 1)}
+                />
+      </div>
     </div>
   );
 }

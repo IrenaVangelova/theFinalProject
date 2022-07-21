@@ -12,6 +12,22 @@
     width: 20%;
 }
 
+.img-info > img {
+    width: 90%;
+}
+
+.img-info > label {
+    border: 1px solid #A5A5A5;
+    display: block;
+    width: 180px;
+    font-family: Roboto Slab;
+    height: 7%;
+    color: grey;
+    text-align: center;
+    padding-top: 4px;
+    border-radius: 5px;
+}
+
 .recipe-info {
     font-family: Roboto Slab;
     width: 35%;
@@ -138,3 +154,4 @@
     background: #F0EFEA;
     color: #626262;
 }
+
