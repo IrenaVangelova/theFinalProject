@@ -23,7 +23,7 @@ const Login = () => {
         localStorage.setItem("user", JSON.stringify(data));
         navigate("/");
       })
-      .catch((error) => console.log("error"));
+      .catch((error) => alert('Invalid username or password'));
   };
 
   return (
